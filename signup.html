@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title> Create new profile </title>
+    <script type="module" src="/js/index.js" defer></script>
+  </head>
+  <body class="bg-gradient-to-br from-teal-500 to-fuchsia-600 w-full mx-auto">
+  <!-- Navigation header -->
+  <header class="sticky top-0 z-30 p-3 bg-gradient-to-br from-teal-500 to-fuchsia-700 shadow">
+      <nav id="nav-bar">
+          <ul class="flex flex-row justify-evenly content-center">
+              <li role="">
+                  <a href="index.html" class="font-semibold text-orange-50 rounded hover:text-orange-400">LOGO</a>
+              </li>
+              <li>
+                  <a href="signup.html" class="font-semibold text-orange-50 rounded hover:text-orange-400">Login / Signup</a>
+              </li>
+              <li>
+                  <a href="#" class="font-semibold text-orange-50 rounded hover:text-orange-400">Signup</a>
+              </li>
+          </ul>
+      </nav>
+  </header>
+  <!-- End Navigation header -->
+
+  <!-- Intro header -->
+  <header class="mx-4 py-4 flex flex-col justify-center items-center">
+      <h1 class=" my-4 text-2xl text-orange-50">Welcome to Noroff social network!</h1>
+      <p>
+          Fellow comrades of the Noroff experience, please join!
+      </p>
+  </header>
+
+  <!-- SignUp form -->
+  <main class="mx-4 my-8 flex flex-col gap-4 justify-start items-center">
+      <div role="none" class="w-full rounded shadow-md bg-[url('./uploads/vintage-tech.jpg')] bg-no-repeat bg-center bg-cover md:w-9/12">
+          <section class="px-2 py-4">
+              <!-- SignUp form -->
+              <form id="signupForm" action="#" class="px-4 bg-neutral-800 bg-opacity-50 rounded-md sm:w-11/12 md:w-10/12 lg:w-9/12 mx-auto max-w-2xl">
+                  <fieldset class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                      <legend class="text-2xl my-8 font-serif text-teal-400">Enter your details</legend>
+                      <!-- UserName -->
+                      <div role="group" class="flex flex-col text-lg text-orange-50 font-mono">
+                          <label for="userName" class="sr-only">Username:</label>
+                          <input id="userName" class="p-2 rounded-md bg-neutral-900  placeholder-orange-50 focus:z-10 focus:outline-none focus:ring-indigo-500"
+                                 type="text" name="userName" placeholder="Create your username" autofocus>
+                          <div class="text-lg text-red-600" data-input-error-message></div>
+                      </div>
+                      <!-- EmailSignup -->
+                      <div role="group" class="flex flex-col text-lg text-orange-50 font-mono">
+                          <label for="emailSignup" class="sr-only">Email:</label>
+                          <input id="emailSignup" class="p-2 rounded-md bg-neutral-900  placeholder-orange-50 focus:z-10 focus:outline-none focus:ring-indigo-500"
+                                 type="email" name="emailSignup" placeholder="Your Noroff email">
+                          <div class="text-lg text-red-600" data-input-error-message></div>
+                      </div>
+                      <!-- Password -->
+                      <div role="group" class="flex flex-col text-lg text-orange-50 font-mono">
+                          <label for="password" class="sr-only">Password</label>
+                          <input id="password" class="p-2 rounded-md bg-neutral-900  placeholder-orange-50 focus:z-10 focus:outline-none focus:ring-indigo-500"
+                                 type="password" name="password" placeholder="Your password">
+                          <div class="text-lg text-red-600" data-input-error-message></div>
+                      </div>
+                      <!-- ConfirmPassword -->
+                      <div role="group" class="flex flex-col text-lg text-orange-50 font-mono">
+                          <label for="confirmPassword" class="sr-only">Confirm your password</label>
+                          <input id="confirmPassword" class="p-2 rounded-md bg-neutral-900  placeholder-orange-50 focus:z-10 focus:outline-none focus:ring-indigo-500"
+                                 type="password" name="confirmPassword" placeholder="Confirm chosen password">
+                          <div class="text-lg text-red-600" data-input-error-message></div>
+                      </div>
+                  </fieldset>
+                  <button type="submit" class="w-1/2 pt-1 pb-2 my-8 rounded-md shadow text-lg font-semibold text-teal-200 bg-indigo-700 bg-opacity-80 hover:bg-opacity-100">Sign Up</button>
+              </form>
+              <!-- End SignUp form -->
+
+          </section>
+      </div>
+  </main>
+
+  </body>
+</html>
