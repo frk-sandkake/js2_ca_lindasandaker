@@ -1,6 +1,5 @@
 {
   "name": "js2-lindasandaker",
-  "private": true,
   "version": "0.0.0",
   "description": "JavaScript 2, Course Assignment; Building a social media app, fetching data from Noroff Social API.",
   "main": "index.js",
@@ -12,9 +11,13 @@
   },
   "author": "Linda Sandaker",
   "devDependencies": {
+    "@tailwindcss/forms": "^0.5.3",
     "autoprefixer": "^10.4.12",
     "postcss": "^8.4.17",
     "tailwindcss": "^3.1.8",
     "vite": "^3.1.0"
+  },
+  "dependencies": {
+    "flowbite": "^1.5.3"
   }
 }
