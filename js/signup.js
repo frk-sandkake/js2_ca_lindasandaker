@@ -94,13 +94,13 @@ signupForm.addEventListener('submit', (e) => {
 
         if (response.ok) {
           console.log('Post request successful!');
-          location.replace("/")
+          location.replace("/login.html")
         } else {
           console.log(`Post request failed ${data.message}`);
         }
 
-      } catch (e) {
-        console.log("Error: ", e.message);
+      } catch (err) {
+        console.log("Error: ", err.message);
       }
     })();
   } else {
