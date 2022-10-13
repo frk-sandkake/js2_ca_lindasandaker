@@ -9,7 +9,7 @@ function createNavBar() {
       let navLinks;
       navLinks = `
           <li role="menuitem">
-              <a role="link" href="/signup.html" class="${pathname === "/signup.html" ? "p-2 rounded font-semibold text-lg shadow-lg text-orange-50" : "font-semibold text-orange-50 hover:text-orange-400"}">
+              <a role="link" href="/signup.html" class="${pathname === "/signup.html" ? "p-2 rounded font-semibold text-lg shadow-lg text-orange-50" : ""}">
                     LOGO
               </a>
           </li>
@@ -27,11 +27,11 @@ function createNavBar() {
       if (userName) {
           navLinks = `
           <li role="menuitem">
-              <a role="link" href="/index.html" class="${pathname === "/index.html" ? "p-2 rounded font-semibold text-lg shadow-lg text-orange-50" : "font-semibold text-orange-50 hover:text-orange-400"}">
+              <a role="link" href="/index.html" class="${pathname === "/index.html" ? "p-2 rounded font-semibold text-lg shadow-lg text-orange-50" : ""}">
                     LOGO
               </a>
           </li>
-          <li><span class="font-semibold text-orange-50 hover:text-orange-400">${userName}</span></li>
+          <li class="px-8 font-semibold text-orange-50 hover:text-orange-400"><span class="px-8 font-semibold text-orange-50 hover:text-orange-400">${userName}</span></li>
           <li>
               <button id="logout-btn" class="font-semibold text-orange-50 hover:text-orange-400">
                     LogOut
@@ -41,7 +41,7 @@ function createNavBar() {
 
       }
       navBar.innerHTML = `
-      <ul role="menu" class="flex flex-row justify-evenly content-center">
+      <ul role="menu" class="flex flex-row justify-evenly items-center">
            ${navLinks}
       </ul>
       `
