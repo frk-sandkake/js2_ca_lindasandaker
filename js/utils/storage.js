@@ -8,7 +8,7 @@ function saveToken(token) {
 }
 
 function getToken() {
-  const value = localStorage.getItem(tokenKey);
+  const value = getDataFromStorage(tokenKey);
   if (value) {
     return JSON.parse(value);
   } else {
@@ -25,7 +25,7 @@ function getUserName() {
   if (userKey) {
     return user.name
   } else {
-    return null;
+    return null
   }
 }
 
@@ -42,4 +42,8 @@ function getDataFromStorage(key) {
   }
 }
 
-export { saveToken, getToken, saveUserToStorage, getUserName}
+function clearDataFromStorage() {
+  localStorage.clear();
+}
+
+export { saveToken, getToken, saveUserToStorage, getUserName, clearDataFromStorage}
