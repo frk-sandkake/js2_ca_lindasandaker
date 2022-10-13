@@ -3,9 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title> Create new profile </title>
+    <title> Login to profile </title>
     <script type="module" src="/js/index.js" defer></script>
-    <script type="module" src="/js/signup.js" defer></script>
+    <script type="module" src="/js/login.js" defer></script>
   </head>
   <body class="bg-gradient-to-br from-teal-500 to-fuchsia-600 w-full mx-auto">
   <!-- Navigation header -->
@@ -28,35 +28,23 @@
 
   <!-- Intro header -->
   <header class="mx-4 py-4 flex flex-col justify-center items-center">
-      <h1 class=" my-4 text-2xl text-orange-50">Welcome to Noroff social network!</h1>
-      <p>
-          Fellow comrades of the Noroff experience, please join!
-      </p>
+      <h1 class=" my-4 text-2xl text-orange-50">Welcome back fellow Noroff socialites!</h1>
   </header>
 
   <main class="mx-4 my-8 flex flex-col gap-4 justify-start items-center">
       <div role="none" class="w-full rounded shadow-md bg-[url('./uploads/vintage-tech.jpg')] bg-no-repeat bg-center bg-cover md:w-9/12">
           <section class="px-2 py-4">
-              <!-- SignUp form -->
-              <form id="signupForm" action="#" class="px-4 bg-gray-800 bg-opacity-50 rounded-md sm:w-11/12 md:w-10/12 lg:w-9/12 mx-auto max-w-2xl">
+              <!-- LogIn form -->
+              <form id="loginForm" class="px-4 bg-gray-800 bg-opacity-50 rounded-md sm:w-11/12 md:w-10/12 lg:w-9/12 mx-auto max-w-2xl">
                   <fieldset class="grid grid-cols-1 gap-4 sm:grid-cols-2">
                       <legend class="text-2xl my-8 font-serif text-teal-400">Enter your details</legend>
-                      <!-- UserName -->
+                      <!-- EmailLogin -->
                       <div role="group" class="flex flex-col text-lg text-orange-50 font-mono">
-                          <label for="userName" class="sr-only">Username:</label>
-                          <input id="userName" class="p-2 rounded-md bg-neutral-900  placeholder-orange-50 focus:z-10 focus:outline-none focus:ring-indigo-500"
-                                 type="text" name="userName" placeholder="Create your username" autofocus>
+                          <label for="emailLogin" class="sr-only">Email:</label>
+                          <input id="emailLogin" class="p-2 rounded-md bg-neutral-900  placeholder-orange-50 focus:z-10 focus:outline-none focus:ring-indigo-500"
+                                 type="text" name="emailLogin" placeholder="Your Noroff email">
                           <div class="hidden p-2 bg-neutral-900 rounded-md text-sm text-center text-red-600" data-input-error-message>
-                              <!-- Message in signup.js -->
-                          </div>
-                      </div>
-                      <!-- EmailSignup -->
-                      <div role="group" class="flex flex-col text-lg text-orange-50 font-mono">
-                          <label for="emailSignup" class="sr-only">Email:</label>
-                          <input id="emailSignup" class="p-2 rounded-md bg-neutral-900  placeholder-orange-50 focus:z-10 focus:outline-none focus:ring-indigo-500"
-                                 type="text" name="emailSignup" placeholder="Your Noroff email">
-                          <div class="hidden p-2 bg-neutral-900 rounded-md text-sm text-center text-red-600" data-input-error-message>
-                              <!-- Message in signup.js -->
+                              <!-- Message in login.js -->
                           </div>
                       </div>
                       <!-- Password -->
@@ -65,25 +53,15 @@
                           <input id="password" class="p-2 rounded-md bg-neutral-900  placeholder-orange-50 focus:z-10 focus:outline-none focus:ring-indigo-500"
                                  type="password" name="password" placeholder="Your password">
                           <div class="hidden p-2 bg-neutral-900 rounded-md text-sm text-center text-red-600" data-input-error-message>
-                              <!-- Message in signup.js -->
-                          </div>
-                      </div>
-                      <!-- ConfirmPassword -->
-                      <div role="group" class="flex flex-col text-lg text-orange-50 font-mono">
-                          <label for="confirmPassword" class="sr-only">Confirm your password</label>
-                          <input id="confirmPassword" class="p-2 rounded-md bg-neutral-900  placeholder-orange-50 focus:z-10 focus:outline-none focus:ring-indigo-500"
-                                 type="password" name="confirmPassword" placeholder="Confirm chosen password">
-                          <div class="hidden p-2 bg-neutral-900 rounded-md text-sm text-center text-red-600" data-input-error-message>
-                              <!-- Message in signup.js -->
+                              <!-- Message in login.js -->
                           </div>
                       </div>
                   </fieldset>
                   <button type="submit" class="w-1/2 pt-1 pb-2 my-8 rounded-md shadow text-lg font-semibold text-teal-200 bg-indigo-700 bg-opacity-80 hover:bg-opacity-100">
-                      Sign Up
+                      Log In
                   </button>
               </form>
-              <!-- End SignUp form -->
-
+              <!-- End LogIn form -->
           </section>
       </div>
   </main>
