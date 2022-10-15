@@ -20,7 +20,7 @@ function saveUserToStorage(user) {
   saveDataToStorage(userKey, user);
 }
 
-function getUserName() {
+function getUserNameStorage() {
   const user = getDataFromStorage(userKey);
   if (userKey) {
     return user.name
@@ -46,4 +46,4 @@ function clearDataFromStorage() {
   localStorage.clear();
 }
 
-export { saveToken, getToken, saveUserToStorage, getUserName, clearDataFromStorage}
+export { saveToken, getToken, saveUserToStorage, getUserNameStorage, clearDataFromStorage}

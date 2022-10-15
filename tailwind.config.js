@@ -3,7 +3,8 @@ module.exports = {
   content: [
     "./*.{html,js}",
     "./js/*.js",
-    "./node_modules/flowbite/**/*.js"
+    "./node_modules/flowbite/**/*.js",
+    "./js/components/nav-bar.js"
   ],
   theme: {
     extend: {},
