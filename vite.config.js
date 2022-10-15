@@ -6,7 +6,8 @@ export default {
       input: {
         home: resolve(__dirname, 'index.html'),
         signup: resolve(__dirname, 'signup.html'),
-        login: resolve(__dirname, 'login.html')
+        login: resolve(__dirname, 'login.html'),
+        profile: resolve(__dirname, 'profile.html')
       },
     },
   },

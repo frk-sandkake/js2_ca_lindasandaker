@@ -11,9 +11,6 @@ if(!accessToken) {
 
 const allPostItems = document.getElementById('allPostItems');
 
-console.log(allPostItems);
-console.log("accessToken: ", accessToken);
-console.log("GET_POSTS_URL", GET_POSTS_URL);
 
 (async function getAllPosts() {
   const response = await fetch(GET_POSTS_URL, {
@@ -26,13 +23,11 @@ console.log("GET_POSTS_URL", GET_POSTS_URL);
   if (response.ok) {
       const posts = await response.json();
       let now = moment(new Date());
-      console.log('Got posts: ', posts);
 
       if (!posts.length) {
           console.log('No posts found');
       } else {
           const htmlPostsFeed = posts.map((post) => {
-              console.log('post baby: ', post);
               const {id, title, body, created} = post;
               const createdXDaysAgo = now.diff(created, 'days')
 
