@@ -3,14 +3,11 @@ import {GET_USER_POSTS_URL, DELETE_POST_URL} from './settings/api'
 import {getToken} from './utils/storage'
 
 const accessToken = getToken();
-/*
  if(!accessToken) {
  location.href = '/login.html'
  }
- */
 
 const myPostItems = document.getElementById('myPostItems');
-
 
 async function getMyPosts() {
   const response = await fetch(GET_USER_POSTS_URL, {
@@ -20,13 +17,11 @@ async function getMyPosts() {
       'Authorization': `Bearer ${accessToken}`
     }
   })
-  console.log(response);
+
   if (response.ok) {
     const userJSON = await response.json();
     const {posts} = userJSON;
     let now = moment(new Date());
-   // console.log("My user?: ", userJSON);
-   // console.log("My posts?: ", posts);
 
     if (!posts.length) {
       console.log('No posts found');
@@ -34,7 +29,6 @@ async function getMyPosts() {
       const htmlPostsFeed = posts.map((post) => {
         const {id, owner, title, body, created} = post;
         const createdXDaysAgo = now.diff(created, 'days');
-       // console.log(createdXDaysAgo);
 
         return (`
                  <li class="m-4 col-span-1 p-4 border-fuchsia-700 border-2 border-b-4 rounded shadow focus-within:ring-2 focus-within:ring-inset focus-within:ring-teal-600">
@@ -56,10 +50,10 @@ async function getMyPosts() {
                         <p class="my-2 p-4 bg-orange-50 rounded-md font-medium col-span-5">
                             ${body}
                         </p>
-                        <button data-id="${id}" class="delete-post-btn col-span-3 mt-2 mb-4 pt-1 pb-2 rounded-md shadow-lg text-lg font-semibold text-cyan-300 bg-teal-900 hover:bg-cyan-800" data-delete-button>
+                        <button data-id="${id}" class="delete-post-btn col-span-3 mt-2 mb-4 pt-1 pb-2 rounded-md shadow-lg text-lg font-semibold text-cyan-300 bg-teal-900 hover:bg-cyan-800">
                             Delete
                         </button>
-                        <a href="#" class="col-span-2 text-center mt-2 mb-4 pt-1 pb-2 text-lg font-semibold text-cyan-300 hover:text-cyan-900">
+                        <a href="/edit-post.html?post_id=${id}" class="col-span-2 text-center mt-2 mb-4 pt-1 pb-2 text-lg font-semibold text-cyan-300 hover:text-cyan-900">
                             Edit
                         </a>
                     </div>
@@ -68,7 +62,6 @@ async function getMyPosts() {
       }).join('');
       myPostItems.insertAdjacentHTML('beforeend', htmlPostsFeed);
     }
-
   } else {
     const err = await response.json();
     const message = `Sorry, ${err}`;
@@ -82,26 +75,17 @@ getMyPosts().then(() => {
 
 function deleteUserPostBtnEvent() {
   let deleteUserPostBtn = document.getElementsByClassName('delete-post-btn');
-  console.log("deleteBtn: ", deleteUserPostBtn);
-
   const allDeleteBtns = deleteUserPostBtn.length;
-  for (let i = 0; i < allDeleteBtns; i++) {
-    console.log("deleteBtn index: ", i);
-    deleteUserPostBtn[i].addEventListener('click', () => {
-      console.log(`${i} delete button was clicked`);
-      console.log("this.dataset.postId: ", deleteUserPostBtn[i].getAttribute("data-id"))
 
+  for (let i = 0; i < allDeleteBtns; i++) {
+    deleteUserPostBtn[i].addEventListener('click', () => {
       const postId = deleteUserPostBtn[i].getAttribute("data-id");
-      console.log(postId);
       deletePostByIdHandler(postId);
     });
   }
 }
 
 function deletePostByIdHandler(id) {
-  console.log(id);
-  console.log("Delete post btn is clicked");
-
   const deletePostById = async () => {
     try {
       let response = await fetch(`${DELETE_POST_URL}/${id}`, {
@@ -111,7 +95,6 @@ function deletePostByIdHandler(id) {
           }
       });
       if (response.status === 200) {
-        console.log("deleted post success");
         location.reload();
         getMyPosts().then(() => {
           deleteUserPostBtnEvent();
@@ -120,7 +103,7 @@ function deletePostByIdHandler(id) {
         const err = await response.json();
         const message = `Sorry, ${err}`;
         console.log(message);
-        /*throw new Error(message);*/
+        throw new Error(message);
       }
     } catch (e) {
       console.log(e);

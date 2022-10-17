@@ -16,7 +16,6 @@
       </nav>
   </header>
 
-
   <!-- All posts Feed -->
   <main class="mx-auto my-6 grid lg:grid-cols-2 gap-y-4 justify-items-center max-w-5xl">
       <h1 class="my-4 text-2xl lg:col-span-2">Latest posts</h1>
@@ -33,24 +32,36 @@
                       <legend class="pb-4 text-xl font-serif text-cyan-300">Post something:</legend>
                       <div role="group" class="col-span-2 font-mono">
                           <label for="postTitle" class="sr-only">Title</label>
-                          <input id="postTitle" type="text" class="w-full text-sm bg-orange-50 border-orange-600 rounded-md shadow-lg focus:outline-none focus:ring-indigo-500" placeholder="Post title" autofocus>
+                          <input id="postTitle" type="text" class="w-full text-sm bg-orange-50 border-orange-600 rounded-md shadow-lg focus:outline-none focus:ring-indigo-500"
+                                 placeholder="Post title" autofocus>
                           <div class="p-1 pb-2 text-sm text-red-500" data-input-error-message></div>
                       </div>
                       <div role="group" class="col-span-2 font-mono">
                           <label for="postContent" class="sr-only">Post content</label>
-                          <textarea id="postContent" class="w-full text-sm bg-orange-50 border-orange-600 rounded-md shadow-lg focus:outline-none focus:ring-indigo-500" placeholder="Message"></textarea>
+                          <textarea id="postContent" class="w-full text-sm bg-orange-50 border-orange-600 rounded-md shadow-lg focus:outline-none focus:ring-indigo-500"
+                                    placeholder="Message">
+                          </textarea>
                           <div class="p-1 pb-2 text-sm text-red-500" data-input-error-message></div>
                       </div>
                   </fieldset>
-                  <button class="w-full mt-2 mb-4 pt-1 pb-2 rounded-md shadow-lg text-lg font-semibold text-cyan-300 bg-teal-900 hover:bg-cyan-800">Post</button>
+                  <button class="w-full mt-2 mb-4 pt-1 pb-2 rounded-md shadow-lg text-lg font-semibold text-cyan-300 bg-teal-900 hover:bg-cyan-800">
+                      Post
+                  </button>
               </form>
           </div>
       </section>
 
+      <section>
+          <form>
+              <label for="search">Search</label>
+              <input id="search" name="search" placeholder="Search" type="text">
+          </form>
+      </section>
+
       <!-- All posts section -->
       <section class="lg:col-span-1">
-          <ul id="allPostItems" role="list" class="grid grid-cols-1 gap-y-4">
-
+          <ul id="allPostItems" role="list" class="max-w-[500px] grid grid-cols-1 gap-y-4">
+            <!-- get-posts.js -->
           </ul>
       </section>
   </main>
