@@ -3,10 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title> My page </title>
+    <title> Edit posts page </title>
     <script type="module" src="/js/index.js" defer></script>
-    <script type="module" src="/js/create-post.js" defer></script>
-    <script type="module" src="/js/get-delete-user-posts.js" defer></script>
+    <script type="module" src="/js/edit-post.js" defer></script>
   </head>
   <body class="bg-gradient-to-br from-teal-500 to-fuchsia-600 w-full mx-auto">
   <!-- Navigation header -->
@@ -16,19 +15,18 @@
       </nav>
   </header>
 
-  <!-- My posts -->
-  <main class="mx-auto my-6 grid lg:grid-cols-2 gap-y-4 justify-items-center max-w-5xl">
-      <h1 class="my-4 text-2xl lg:col-span-2">My posts</h1>
-      <!-- Create new post -->
-      <section class="min-w-[300px] lg:col-span-1">
+  <main class="mx-auto my-6 grid lg:grid-cols-2 gap-y-4 justify-items-center h-screen max-w-5xl">
+      <h1 class="my-4 text-2xl lg:col-span-2">Edit post</h1>
+      <!-- Edit post -->
+      <section class="min-w-[300px] lg:col-span-2">
           <div class="p-4 grid grid-cols-1 border-fuchsia-700 border-2 border-b-4 rounded shadow">
               <div role="img" class="col-span-1">
                   <img src="./uploads/avatar2.jpg" class="m-2 inline-block rounded-full w-[2rem] h-[2rem]" alt="Avatar">
                   <span role="presentation" class="font-semibold text-orange-50">frk_Sandkake</span>
               </div>
-              <form id="createPostForm" class="col-span-1">
+              <form id="editPostForm" class="col-span-1">
                   <fieldset class="grid grid-cols-2">
-                      <legend class="pb-4 text-xl font-serif text-cyan-300">Post something:</legend>
+                      <legend class="pb-4 text-xl font-serif text-cyan-300">Edit mode:</legend>
                       <div role="group" class="col-span-2 font-mono">
                           <label for="postTitle" class="sr-only">Title</label>
                           <input id="postTitle" type="text" class="w-full text-sm bg-orange-50 border-orange-600 rounded-md shadow-lg focus:outline-none focus:ring-indigo-500"
@@ -44,16 +42,10 @@
                       </div>
                   </fieldset>
                   <button class="w-full mt-2 mb-4 pt-1 pb-2 rounded-md shadow-lg text-lg font-semibold text-cyan-300 bg-teal-900 hover:bg-cyan-800">
-                      Post
+                      Edit
                   </button>
               </form>
           </div>
-      </section>
-      <!-- My posts section -->
-      <section class="lg:col-span-1">
-          <ul id="myPostItems" role="list" class="max-w-[500px] grid grid-cols-1 gap-y-4">
-              <!-- get-delete-user-posts.js -->
-          </ul>
       </section>
   </main>
 

@@ -8,7 +8,6 @@ const logOutBtn = document.getElementById('logout-btn');
 
 if (logOutBtn) {
   logOutBtn.addEventListener('click', () => {
-    console.log('I am clicked!');
     clearDataFromStorage();
     window.location.replace('/login.html');
   })

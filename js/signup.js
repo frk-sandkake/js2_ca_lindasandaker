@@ -17,7 +17,6 @@ signupForm.addEventListener('submit', (e) => {
     setSuccess(userName);
     isUserName = true;
   } else {
-    console.log('More then 1 character');
     setError(userName, 'Choose your username');
   }
 
@@ -26,7 +25,6 @@ signupForm.addEventListener('submit', (e) => {
     setSuccess(email);
     isEmail = true;
   } else {
-    console.log('Please enter email');
     setError(email, 'Remember the email!');
   }
 
@@ -35,7 +33,6 @@ signupForm.addEventListener('submit', (e) => {
     setSuccess(email);
     isEmailValid = true;
   } else if (checkLength(email.value, 1) && emailValid(email.value) !== true ) {
-    console.log('Please enter only Noroff email');
     setError(email, 'Noroff emails only!');
   }
 
@@ -44,7 +41,6 @@ signupForm.addEventListener('submit', (e) => {
     setSuccess(password);
     isPassword = true;
   } else {
-    console.log('password must be at least 8 character');
     setError(password, 'Minimum 8 character!');
   }
 
@@ -53,7 +49,6 @@ signupForm.addEventListener('submit', (e) => {
     setSuccess(confirmPassword);
     isPasswordConfirm = true;
   } else {
-    console.log('confirm password must be at least 8 character');
     setError(confirmPassword, 'Remember to confirm password!');
   }
 
@@ -63,7 +58,6 @@ signupForm.addEventListener('submit', (e) => {
     setSuccess(confirmPassword);
     isPasswordsMatch = true;
   } else {
-    console.log("passwords don't match");
     setError(confirmPassword, "Sorry, passwords doesn't match");
   }
 
@@ -93,7 +87,6 @@ signupForm.addEventListener('submit', (e) => {
         const data = await response.json();
 
         if (response.ok) {
-          console.log('Post request successful!');
           location.replace("/login.html")
         } else {
           console.log(`Post request failed ${data.message}`);
