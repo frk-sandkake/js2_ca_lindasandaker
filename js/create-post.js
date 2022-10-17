@@ -55,10 +55,10 @@ createPostForm.addEventListener('submit', (e) => {
       if (response.ok) {
         const data = await response.json();
         console.log("post data: ", data);
-        location.href = "/"
+        location.reload();
       } else {
         const err = await response.json();
-        const message = "I'm sorry but ";
+        const message = `I'm sorry but ${err}`;
         throw new Error(message);
       }
       createPost_POST().reset();
