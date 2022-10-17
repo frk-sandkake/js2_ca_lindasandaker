@@ -7,7 +7,10 @@ if(!accessToken) {
   location.href = '/login.html'
 }
 
+const searchBar = document.getElementById('search');
 const allPostItems = document.getElementById('allPostItems');
+let now = moment(new Date());
+let posts = [];
 
 (async function getAllPosts() {
   const response = await fetch(GET_POSTS_URL, {
@@ -18,17 +21,29 @@ const allPostItems = document.getElementById('allPostItems');
     }
   })
   if (response.ok) {
-      const posts = await response.json();
-      let now = moment(new Date());
+      posts = await response.json();
+      showPostDataHTML(posts);
+  } else {
+      const err = await response.json();
+      const message = `Sorry, ${err}`;
+      throw new Error(message);
+  }
+})().catch(err => {
+  console.log('Sorry, could not get posts..');
+  console.log(err);
+});
 
-      if (!posts.length) {
-          console.log('No posts found');
-      } else {
-          const htmlPostsFeed = posts.map((post) => {
-              const {id, title, body, created} = post;
-              const createdXDaysAgo = now.diff(created, 'days')
 
-              return (`
+const showPostDataHTML = (posts) => {
+  allPostItems.innerHTML = "";
+  if (!posts.length) {
+    allPostItems.innerHTML = "Sorry, there are no posts today";
+  } else {
+    const htmlPostsFeed = posts.map((post) => {
+      const {id, title, body, created} = post;
+      const createdXDaysAgo = now.diff(created, 'days')
+
+      return (`
                   <li class="m-4 col-span-1 p-4 border-fuchsia-700 border-2 border-b-4 rounded shadow focus-within:ring-2 focus-within:ring-inset focus-within:ring-teal-600">
                     <div class="grid grid-cols-6 pb-4">
                         <div role="img" class="col-span-6 py-4">
@@ -53,15 +68,16 @@ const allPostItems = document.getElementById('allPostItems');
                     </div>
                   </li>
               `)
-          }).join('');
-          allPostItems.insertAdjacentHTML('beforeend', htmlPostsFeed);
-      }
-  } else {
-      const err = await response.json();
-      const message = `Sorry, ${err}`;
-      throw new Error(message);
+    }).join('');
+    allPostItems.insertAdjacentHTML('beforeend', htmlPostsFeed);
   }
-})().catch(err => {
-  console.log('Sorry, could not get posts..');
-  console.log(err);
+}
+
+searchBar.addEventListener('keydown', (e) => {
+  const searchText = e.target.value.toLowerCase();
+  const postsFound = posts.filter((post) => {
+    return post.title.toLowerCase().includes(searchText) ||
+           post.body.toLowerCase().includes(searchText);
+  });
+  showPostDataHTML(postsFound);
 });
