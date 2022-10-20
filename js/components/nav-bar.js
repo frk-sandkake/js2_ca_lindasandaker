@@ -42,7 +42,6 @@ function createNavBar() {
               </button>
           </li>
           `;
-
       }
       navBar.innerHTML = `
       <ul role="menu" class="w-full flex flex-row justify-evenly items-center">
