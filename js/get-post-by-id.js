@@ -1,22 +1,25 @@
-import {GET_POST_ID_URL} from './settings/api'
-import {getToken} from './utils/storage'
+import { GET_POST_ID_URL } from "./settings/api";
+import { getToken } from "./utils/storage";
+import moment from 'moment'
 
 const paramString = window.location.search;
 const searchParam = new URLSearchParams(paramString);
 const postId = searchParam.get("post_id");
 const accessToken = getToken();
-const singlePostView = document.getElementById('postDetails');
+const singlePostView = document.getElementById("postDetails");
 
 async function getPostById() {
   const response = await fetch(`${GET_POST_ID_URL}/${postId}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      "Authorization": `Bearer ${accessToken}`
-    }
-  })
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
   const data = await response.json();
   const { id, title, body, created, updated } = data;
+  const createdWhen = moment(created).fromNow();
+  const updatedWhen = moment(updated).fromNow();
 
   singlePostView.innerHTML = `
         <div class="p-4 grid grid-cols-6 border-fuchsia-700 border-2 border-b-4 rounded shadow">
@@ -38,14 +41,14 @@ async function getPostById() {
                   </p>   
                   <span class="col-span-1">ID: ${id}</span>         
                   <time datetime="2021-01-27T16:35" class="col-span-2 text-xs text-neutral-300 whitespace-nowrap">
-                        ${created} days ago
+                        ${createdWhen}
                   </time>
                   <time datetime="2021-01-27T16:35" class="col-span-2 text-xs text-neutral-300 whitespace-nowrap">
-                        ${updated} days ago
+                        ${updatedWhen}
                   </time>
                        
           </div>
-  `
+  `;
 }
 
 getPostById();

@@ -1,36 +1,37 @@
 import moment from "moment";
-import {GET_USER_POSTS_URL, DELETE_POST_URL} from './settings/api'
-import {getToken} from './utils/storage'
+import { GET_USER_POSTS_URL, DELETE_POST_URL } from "./settings/api";
+import { getToken } from "./utils/storage";
 
 const accessToken = getToken();
- if(!accessToken) {
- location.href = '/login.html'
- }
+if (!accessToken) {
+  location.href = "/login.html";
+}
 
-const myPostItems = document.getElementById('myPostItems');
+const myPostItems = document.getElementById("myPostItems");
 
 async function getMyPosts() {
   const response = await fetch(GET_USER_POSTS_URL, {
-    method: 'GET',
+    method: "GET",
     headers: {
       "Content-Type": "application/json",
-      'Authorization': `Bearer ${accessToken}`
-    }
-  })
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
 
   if (response.ok) {
     const userJSON = await response.json();
-    const {posts} = userJSON;
+    const { posts } = userJSON;
     let now = moment(new Date());
 
     if (!posts.length) {
-      console.log('No posts found');
+      console.log("No posts found");
     } else {
-      const htmlPostsFeed = posts.map((post) => {
-        const {id, owner, title, body, created} = post;
-        const createdXDaysAgo = now.diff(created, 'days');
+      const htmlPostsFeed = posts
+        .map((post) => {
+          const { id, owner, title, body, created } = post;
+          const createdXDaysAgo = now.diff(created, "days");
 
-        return (`
+          return `
                  <li class="m-4 col-span-1 p-4 border-fuchsia-700 border-2 border-b-4 rounded shadow focus-within:ring-2 focus-within:ring-inset focus-within:ring-teal-600">
                     <div class="grid grid-cols-5">
                         <div role="img" class="col-span-5 ">
@@ -58,9 +59,10 @@ async function getMyPosts() {
                         </a>
                     </div>
                   </li>
-              `)
-      }).join('');
-      myPostItems.insertAdjacentHTML('beforeend', htmlPostsFeed);
+              `;
+        })
+        .join("");
+      myPostItems.insertAdjacentHTML("beforeend", htmlPostsFeed);
     }
   } else {
     const err = await response.json();
@@ -74,11 +76,11 @@ getMyPosts().then(() => {
 });
 
 function deleteUserPostBtnEvent() {
-  let deleteUserPostBtn = document.getElementsByClassName('delete-post-btn');
+  let deleteUserPostBtn = document.getElementsByClassName("delete-post-btn");
   const allDeleteBtns = deleteUserPostBtn.length;
 
   for (let i = 0; i < allDeleteBtns; i++) {
-    deleteUserPostBtn[i].addEventListener('click', () => {
+    deleteUserPostBtn[i].addEventListener("click", () => {
       const postId = deleteUserPostBtn[i].getAttribute("data-id");
       deletePostByIdHandler(postId);
     });
@@ -89,10 +91,10 @@ function deletePostByIdHandler(id) {
   const deletePostById = async () => {
     try {
       let response = await fetch(`${DELETE_POST_URL}/${id}`, {
-          method: 'DELETE',
-          headers: {
-              "Authorization": `Bearer ${accessToken}`
-          }
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
       });
       if (response.status === 200) {
         location.reload();
@@ -108,7 +110,6 @@ function deletePostByIdHandler(id) {
     } catch (e) {
       console.log(e);
     }
-  }
-  deletePostById().then(() => {
-  });
+  };
+  deletePostById().then(() => {});
 }

@@ -12,7 +12,7 @@ function getToken() {
   if (value) {
     return JSON.parse(value);
   } else {
-    return null
+    return null;
   }
 }
 
@@ -23,14 +23,14 @@ function saveUserToStorage(user) {
 function getUserNameStorage() {
   const user = getDataFromStorage(userKey);
   if (userKey) {
-    return user.name
+    return user.name;
   } else {
-    return null
+    return null;
   }
 }
 
 function saveDataToStorage(key, value) {
-  localStorage.setItem(key, JSON.stringify(value))
+  localStorage.setItem(key, JSON.stringify(value));
 }
 
 function getDataFromStorage(key) {
@@ -38,7 +38,7 @@ function getDataFromStorage(key) {
   if (value) {
     return JSON.parse(value);
   } else {
-    return []
+    return [];
   }
 }
 
@@ -46,5 +46,10 @@ function clearDataFromStorage() {
   localStorage.clear();
 }
 
-export { saveToken, getToken, saveUserToStorage,
-  getUserNameStorage, clearDataFromStorage}
+export {
+  saveToken,
+  getToken,
+  saveUserToStorage,
+  getUserNameStorage,
+  clearDataFromStorage,
+};

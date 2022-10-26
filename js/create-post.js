@@ -1,13 +1,13 @@
-import {CREATE_POST_URL} from './settings/api'
-import {getToken} from './utils/storage'
-import {checkLength} from './utils/validation'
-import {setError, setSuccess} from './utils/messages'
+import { CREATE_POST_URL } from "./settings/api";
+import { getToken } from "./utils/storage";
+import { checkLength } from "./utils/validation";
+import { setError, setSuccess } from "./utils/messages";
 
-const createPostForm = document.getElementById('createPostForm');
-const postTitle = document.getElementById('postTitle');
-const postContent = document.getElementById('postContent');
+const createPostForm = document.getElementById("createPostForm");
+const postTitle = document.getElementById("postTitle");
+const postContent = document.getElementById("postContent");
 
-createPostForm.addEventListener('submit', (e) => {
+createPostForm.addEventListener("submit", (e) => {
   e.preventDefault();
 
   let isPostTitle = false;
@@ -15,7 +15,7 @@ createPostForm.addEventListener('submit', (e) => {
     setSuccess(postTitle);
     isPostTitle = true;
   } else {
-    setError(postTitle, 'Please add an title')
+    setError(postTitle, "Please add an title");
   }
 
   let isPostContent = false;
@@ -23,26 +23,26 @@ createPostForm.addEventListener('submit', (e) => {
     setSuccess(postContent);
     isPostContent = true;
   } else {
-    setError(postContent, "Don't forget your message")
+    setError(postContent, "Don't forget your message");
   }
 
   let isPostValid = isPostTitle && isPostContent;
   if (isPostValid) {
-      const postData = {
-        "title": postTitle.value,
-        "body": postContent.value
-      };
-      const accessToken = getToken();
+    const postData = {
+      title: postTitle.value,
+      body: postContent.value,
+    };
+    const accessToken = getToken();
 
     (async function createPost_POST() {
       const response = await fetch(CREATE_POST_URL, {
-        method: 'POST',
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${accessToken}`
+          Authorization: `Bearer ${accessToken}`,
         },
-        body: JSON.stringify(postData)
-      })
+        body: JSON.stringify(postData),
+      });
       if (response.ok) {
         const data = await response.json();
         location.reload();
@@ -52,10 +52,10 @@ createPostForm.addEventListener('submit', (e) => {
         throw new Error(message);
       }
       createPost_POST.reset();
-    })().catch(err => {
+    })().catch((err) => {
       console.log("error: ", err);
     });
   } else {
     console.log("Validation failed");
   }
-})
+});

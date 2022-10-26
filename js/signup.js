@@ -1,15 +1,14 @@
-import {USER_SIGNUP_URL} from './settings/api';
-import {checkLength, emailValid, matchPasswords} from './utils/validation';
-import {setError, setSuccess} from './utils/messages'
+import { USER_SIGNUP_URL } from "./settings/api";
+import { checkLength, emailValid, matchPasswords } from "./utils/validation";
+import { setError, setSuccess } from "./utils/messages";
 
-const signupForm = document.getElementById('signupForm');
-const userName = document.getElementById('userName');
-const email = document.getElementById('emailSignup');
-const password = document.getElementById('password');
-const confirmPassword = document.getElementById('confirmPassword');
+const signupForm = document.getElementById("signupForm");
+const userName = document.getElementById("userName");
+const email = document.getElementById("emailSignup");
+const password = document.getElementById("password");
+const confirmPassword = document.getElementById("confirmPassword");
 
-
-signupForm.addEventListener('submit', (e) => {
+signupForm.addEventListener("submit", (e) => {
   e.preventDefault();
 
   let isUserName = false;
@@ -17,7 +16,7 @@ signupForm.addEventListener('submit', (e) => {
     setSuccess(userName);
     isUserName = true;
   } else {
-    setError(userName, 'Choose your username');
+    setError(userName, "Choose your username");
   }
 
   let isEmail = false;
@@ -25,15 +24,15 @@ signupForm.addEventListener('submit', (e) => {
     setSuccess(email);
     isEmail = true;
   } else {
-    setError(email, 'Remember the email!');
+    setError(email, "Remember the email!");
   }
 
   let isEmailValid = false;
-  if (checkLength(email.value, 1) && emailValid(email.value) === true ) {
+  if (checkLength(email.value, 1) && emailValid(email.value) === true) {
     setSuccess(email);
     isEmailValid = true;
-  } else if (checkLength(email.value, 1) && emailValid(email.value) !== true ) {
-    setError(email, 'Noroff emails only!');
+  } else if (checkLength(email.value, 1) && emailValid(email.value) !== true) {
+    setError(email, "Noroff emails only!");
   }
 
   let isPassword = false;
@@ -41,7 +40,7 @@ signupForm.addEventListener('submit', (e) => {
     setSuccess(password);
     isPassword = true;
   } else {
-    setError(password, 'Minimum 8 character!');
+    setError(password, "Minimum 8 character!");
   }
 
   let isPasswordConfirm = false;
@@ -49,7 +48,7 @@ signupForm.addEventListener('submit', (e) => {
     setSuccess(confirmPassword);
     isPasswordConfirm = true;
   } else {
-    setError(confirmPassword, 'Remember to confirm password!');
+    setError(confirmPassword, "Remember to confirm password!");
   }
 
   let isPasswordsMatch = false;
@@ -61,42 +60,45 @@ signupForm.addEventListener('submit', (e) => {
     setError(confirmPassword, "Sorry, passwords doesn't match");
   }
 
-  let isFormValid = isUserName && isEmail && isEmailValid
-    && isPassword && isPasswordConfirm && isPasswordsMatch;
+  let isFormValid =
+    isUserName &&
+    isEmail &&
+    isEmailValid &&
+    isPassword &&
+    isPasswordConfirm &&
+    isPasswordsMatch;
 
   if (isFormValid) {
-    console.log('Validation succeeded!!');
     const userData = {
-      "name": userName.value,
-      "email": email.value,
-      "password": password.value
-    }
+      name: userName.value,
+      email: email.value,
+      password: password.value,
+    };
 
-    const USER_REGISTRATION_URL_ENDPOINT = USER_SIGNUP_URL;
+    // const USER_REGISTRATION_URL_ENDPOINT = USER_SIGNUP_URL;
 
     (async function userSignUp() {
       try {
-        const response = await fetch(USER_REGISTRATION_URL_ENDPOINT, {
-          method: 'POST',
+        const response = await fetch(USER_SIGNUP_URL, {
+          method: "POST",
           headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
           },
-          body: JSON.stringify(userData)
+          body: JSON.stringify(userData),
         });
 
         const data = await response.json();
 
         if (response.ok) {
-          location.replace("/login.html")
+          location.replace("/login.html");
         } else {
           console.log(`Post request failed ${data.message}`);
         }
-
       } catch (err) {
         console.log("Error: ", err.message);
       }
     })();
   } else {
-    console.log('Validation failed..');
+    console.log("Validation failed..");
   }
 });

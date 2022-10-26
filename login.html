@@ -1,64 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title> Login to profile </title>
+    <title>Login to profile</title>
     <script type="module" src="/js/index.js" defer></script>
     <script type="module" src="/js/login.js" defer></script>
-</head>
-<body class="bg-gradient-to-br from-teal-500 to-fuchsia-600 w-full mx-auto">
-<!-- Navigation header -->
-    <header class="sticky top-0 z-30 p-3 bg-gradient-to-br from-teal-500 to-fuchsia-700 shadow">
-        <nav id="nav-bar">
-          <!-- js/components/nav-bar.js -->
-        </nav>
-    </header>
-    <!-- Intro header -->
-    <header class="mx-4 py-4 flex flex-col justify-center items-center">
-        <h1 class=" my-4 text-2xl text-orange-50">
-            Welcome back fellow Noroff socialites!
-        </h1>
+  </head>
+  <body class="bg-gradient-to-br from-teal-500 to-fuchsia-600 w-full mx-auto">
+    <!-- Navigation header -->
+    <header
+      class="sticky top-0 z-30 p-3 bg-gradient-to-br from-teal-500 to-fuchsia-700 shadow"
+    >
+      <nav id="nav-bar">
+        <!-- js/components/nav-bar.js -->
+      </nav>
     </header>
     <!-- LogIn -->
-    <main class="mx-4 my-8 flex flex-col gap-4 justify-start items-center">
-        <div role="none" class="w-full rounded shadow-md bg-[url('./uploads/vintage-tech.jpg')] bg-no-repeat bg-center bg-cover md:w-9/12">
-            <section class="px-2 py-4">
-              <!-- LogIn form -->
-              <form id="loginForm" class="px-4 bg-gray-800 bg-opacity-50 rounded-md sm:w-11/12 md:w-10/12 lg:w-9/12 mx-auto max-w-2xl">
-                  <fieldset class="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                      <legend class="text-2xl my-8 font-serif text-teal-400">Enter your details</legend>
-                      <!-- EmailLogin -->
-                      <div role="group" class="flex flex-col text-lg text-orange-50 font-mono">
-                          <label for="emailLogin" class="sr-only">Email:</label>
-                          <input id="emailLogin" class="p-2 rounded-md bg-neutral-900 placeholder-orange-50 focus:z-10 focus:outline-none focus:ring-indigo-500"
-                                 type="text" name="emailLogin" placeholder="Your Noroff email" autofocus>
-                          <div class="hidden p-2 bg-neutral-900 rounded-md text-sm text-center text-red-600" data-input-error-message>
-                              <!-- Message in login.js -->
-                          </div>
-                      </div>
-                      <!-- Password -->
-                      <div role="group" class="flex flex-col text-lg text-orange-50 font-mono">
-                          <label for="password" class="sr-only">Password</label>
-                          <input id="password" class="p-2 rounded-md bg-neutral-900  placeholder-orange-50 focus:z-10 focus:outline-none focus:ring-indigo-500"
-                                 type="password" name="password" placeholder="Your password">
-                          <div class="hidden p-2 bg-neutral-900 rounded-md text-sm text-center text-red-600" data-input-error-message>
-                              <!-- Message in login.js -->
-                          </div>
-                      </div>
-                  </fieldset>
-                  <button type="submit" class="w-1/2 pt-1 pb-2 my-8 rounded-md shadow text-lg font-semibold text-teal-200 bg-indigo-700 bg-opacity-80 hover:bg-opacity-100">
-                      Log In
-                  </button>
-              </form>
-            </section>
-        </div>
+    <main class="w-full mx-auto my-8 px-4 py-4 flex flex-col gap-8 justify-start items-center sm:w-11/12 md:w-10/12 lg:w-9/12">
+        <article>
+            <h1 class="my-4 text-2xl text-orange-50">
+                Welcome back fellow Noroff socialites!
+            </h1>
+        </article>
+      <div
+        role="none"
+        class="w-full rounded shadow-md bg-[url('./uploads/vintage-tech.jpg')] bg-no-repeat bg-center bg-cover"
+      >
+        <section class="my-8 py-8">
+          <!-- LogIn form -->
+          <form
+            id="loginForm"
+            class="mx-auto px-4 bg-gray-800 bg-opacity-50 rounded-md sm:w-11/12 md:w-10/12 lg:w-9/12"
+          >
+            <fieldset class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+              <legend class="text-2xl my-8 font-serif text-teal-400">
+                Enter your details
+              </legend>
+              <!-- EmailLogin -->
+              <div
+                role="group"
+                class="flex flex-col text-lg text-orange-50 font-mono"
+              >
+                <label for="emailLogin" class="sr-only">Email:</label>
+                <input
+                  id="emailLogin"
+                  class="p-2 rounded-md bg-neutral-900 placeholder-orange-50 focus:z-10 focus:outline-none focus:ring-indigo-500"
+                  type="text"
+                  name="emailLogin"
+                  placeholder="Your Noroff email"
+                  autofocus
+                />
+                <div
+                  class="hidden p-2 bg-neutral-900 rounded-md text-sm text-center text-red-600"
+                  data-input-error-message
+                >
+                  <!-- Message in login.js -->
+                </div>
+              </div>
+              <!-- Password -->
+              <div
+                role="group"
+                class="flex flex-col text-lg text-orange-50 font-mono"
+              >
+                <label for="password" class="sr-only">Password</label>
+                <input
+                  id="password"
+                  class="p-2 rounded-md bg-neutral-900 placeholder-orange-50 focus:z-10 focus:outline-none focus:ring-indigo-500"
+                  type="password"
+                  name="password"
+                  placeholder="Your password"
+                />
+                <div
+                  class="hidden p-2 bg-neutral-900 rounded-md text-sm text-center text-red-600"
+                  data-input-error-message
+                >
+                  <!-- Message in login.js -->
+                </div>
+              </div>
+            </fieldset>
+            <button
+              type="submit"
+              class="w-1/2 pt-1 pb-2 my-8 rounded-md shadow text-lg font-semibold text-teal-200 bg-indigo-700 bg-opacity-80 hover:bg-opacity-100"
+            >
+              Log In
+            </button>
+          </form>
+        </section>
+      </div>
     </main>
     <!-- Footer -->
     <footer class="w-full py-4 text-center bg-neutral-900">
-        <small class="text-orange-50">
-            &#169; 2022 frk.Sandkake
-        </small>
+      <small class="text-orange-50"> &#169; 2022 frk.Sandkake </small>
     </footer>
-</body>
+  </body>
 </html>

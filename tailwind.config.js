@@ -5,13 +5,10 @@ module.exports = {
     "./js/*.js",
     "./js/**/*.js",
     "./node_modules/flowbite/**/*.js",
-    "./js/components/*.js"
+    "./js/components/*.js",
   ],
   theme: {
     extend: {},
   },
-  plugins: [
-    require('@tailwindcss/forms'),
-    require('flowbite/plugin')
-  ],
-}
+  plugins: [require("@tailwindcss/forms"), require("flowbite/plugin")],
+};

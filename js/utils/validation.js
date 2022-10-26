@@ -17,4 +17,4 @@ function matchPasswords(password, confirmPassword) {
   return password === confirmPassword;
 }
 
-export {checkLength, emailValid, matchPasswords}
+export { checkLength, emailValid, matchPasswords };

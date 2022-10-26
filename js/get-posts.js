@@ -1,49 +1,109 @@
 import moment from "moment";
-import {GET_POSTS_URL} from './settings/api'
-import {getToken} from './utils/storage'
+import { GET_POSTS_URL, SORT_DESC_POSTS_URL, SORT_ASC_POSTS_URL } from "./settings/api";
+import { getToken } from "./utils/storage";
 
 const accessToken = getToken();
-if(!accessToken) {
-  location.href = '/login.html'
+if (!accessToken) {
+  location.href = "/login.html";
 }
 
-const searchBar = document.getElementById('search');
-const allPostItems = document.getElementById('allPostItems');
-let now = moment(new Date());
+const searchBar = document.getElementById("search");
+const sortPostsDesc = document.getElementById("sortDesc");
+const sortPostsAsc = document.getElementById("sortAsc");
+const allPostItems = document.getElementById("allPostItems");
 let posts = [];
 
 (async function getAllPosts() {
   const response = await fetch(GET_POSTS_URL, {
-    method: 'GET',
+    method: "GET",
     headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${accessToken}`
-    }
-  })
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
   if (response.ok) {
+    posts = await response.json();
+    showPostDataHTML(posts);
+  } else {
+    const err = await response.json();
+    const message = `Sorry, ${err}`;
+    throw new Error(message);
+  }
+  console.log("1");
+})().catch((err) => {
+  console.log("Sorry, could not get posts..");
+  window.alert(`Sorry, ${err}`);
+});
+
+searchBar.addEventListener("keydown", (e) => {
+  const searchText = e.target.value.toLowerCase();
+  const postsFound = posts.filter((post) => {
+    return (
+      post.title.toLowerCase().includes(searchText) ||
+      post.body.toLowerCase().includes(searchText)
+    );
+  });
+  showPostDataHTML(postsFound);
+});
+
+sortPostsDesc.addEventListener("click", function(e) {
+  (async function sortPostsDesc() {
+    const response = await fetch(SORT_DESC_POSTS_URL, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+    if (response.ok) {
       posts = await response.json();
       showPostDataHTML(posts);
-  } else {
+    } else {
       const err = await response.json();
       const message = `Sorry, ${err}`;
       throw new Error(message);
-  }
-})().catch(err => {
-  console.log('Sorry, could not get posts..');
-  console.log(err);
+    }
+    console.log("2");
+  })().catch((err) => {
+    console.log("Sorry, could not get posts..");
+    console.log(err);
+  });
 });
 
+sortPostsAsc.addEventListener("click", function(e) {
+  (async function sortPostsDesc() {
+    const response = await fetch(SORT_ASC_POSTS_URL, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+    if (response.ok) {
+      posts = await response.json();
+      showPostDataHTML(posts);
+    } else {
+      const err = await response.json();
+      const message = `Sorry, ${err}`;
+      throw new Error(message);
+    }
+    console.log("3");
+  })().catch((err) => {
+    console.log("Sorry, could not get posts..");
+    console.log(err);
+  });
+});
 
 const showPostDataHTML = (posts) => {
   allPostItems.innerHTML = "";
   if (!posts.length) {
     allPostItems.innerHTML = "Sorry, there are no posts today";
   } else {
-    const htmlPostsFeed = posts.map((post) => {
-      const {id, title, body, created} = post;
-      const createdXDaysAgo = now.diff(created, 'days')
-
-      return (`
+    const htmlPostsFeed = posts
+      .map((post) => {
+        const { id, title, body, created } = post;
+        const createdWhen = moment(created).fromNow();
+        return `
                   <li class="m-4 col-span-1 p-4 border-fuchsia-700 border-2 border-b-4 rounded shadow focus-within:ring-2 focus-within:ring-inset focus-within:ring-teal-600">
                     <div class="grid grid-cols-6 pb-4">
                         <div role="img" class="col-span-6 py-4">
@@ -60,24 +120,16 @@ const showPostDataHTML = (posts) => {
                             </h3>
                         </a>            
                         <time datetime="2021-01-27T16:35" class="col-span-1 text-xs text-neutral-300 whitespace-nowrap">
-                              ${createdXDaysAgo} days ago
+                             ${createdWhen} 
                         </time>
                         <p class="my-2 p-4 bg-orange-50 rounded-md font-medium col-span-6">
                             ${body}
                         </p>
                     </div>
                   </li>
-              `)
-    }).join('');
-    allPostItems.insertAdjacentHTML('beforeend', htmlPostsFeed);
+              `;
+      })
+      .join("");
+    allPostItems.insertAdjacentHTML("beforeend", htmlPostsFeed);
   }
-}
-
-searchBar.addEventListener('keydown', (e) => {
-  const searchText = e.target.value.toLowerCase();
-  const postsFound = posts.filter((post) => {
-    return post.title.toLowerCase().includes(searchText) ||
-           post.body.toLowerCase().includes(searchText);
-  });
-  showPostDataHTML(postsFound);
-});
+};
