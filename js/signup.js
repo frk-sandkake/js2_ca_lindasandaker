@@ -1,6 +1,6 @@
 import { USER_SIGNUP_URL } from "./settings/api";
 import { checkLength, emailValid, matchPasswords } from "./utils/validation";
-import { setError, setSuccess } from "./utils/messages";
+import { setError, setSuccess, generateErrorMessage } from "./utils/messages";
 
 const signupForm = document.getElementById("signupForm");
 const userName = document.getElementById("userName");
@@ -75,8 +75,6 @@ signupForm.addEventListener("submit", (e) => {
       password: password.value,
     };
 
-    // const USER_REGISTRATION_URL_ENDPOINT = USER_SIGNUP_URL;
-
     (async function userSignUp() {
       try {
         const response = await fetch(USER_SIGNUP_URL, {
@@ -90,15 +88,15 @@ signupForm.addEventListener("submit", (e) => {
         const data = await response.json();
 
         if (response.ok) {
-          location.replace("/login.html");
+           location.replace("/login.html");
         } else {
-          console.log(`Post request failed ${data.message}`);
+          generateErrorMessage(signupForm,`I'm sorry but ${data.errors[0].message}`);
         }
       } catch (err) {
-        console.log("Error: ", err.message);
+        generateErrorMessage(signupForm,`catchError: ${err.message}`);
       }
     })();
   } else {
-    console.log("Validation failed..");
+    generateErrorMessage(signupForm,"Validation failed..");
   }
 });

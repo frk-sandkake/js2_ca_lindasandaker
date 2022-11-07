@@ -15,3 +15,11 @@ export const setSuccess = (element) => {
   successDisplay.innerHTML = "";
   successDisplay.classList.add("hidden");
 };
+
+
+export const generateErrorMessage = (element, message) => {
+  const elementControl = element.parentElement;
+  const generalMessage = elementControl.querySelector("[data-input-general-message]");
+
+  generalMessage.innerHTML = message;
+}

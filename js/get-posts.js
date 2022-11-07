@@ -1,6 +1,7 @@
 import moment from "moment";
 import { GET_POSTS_URL, SORT_DESC_POSTS_URL, SORT_ASC_POSTS_URL } from "./settings/api";
 import { getToken } from "./utils/storage";
+import { generateErrorMessage } from "./utils/messages";
 
 const accessToken = getToken();
 if (!accessToken) {
@@ -31,6 +32,7 @@ let posts = [];
   }
   console.log("1");
 })().catch((err) => {
+  generateErrorMessage(allPostItems, "Sorry, could not get the posts..")
   console.log("Sorry, could not get posts..");
   window.alert(`Sorry, ${err}`);
 });
@@ -89,7 +91,7 @@ sortPostsAsc.addEventListener("click", function(e) {
     }
     console.log("3");
   })().catch((err) => {
-    console.log("Sorry, could not get posts..");
+    generateErrorMessage(allPostItems,"Sorry, could not get posts..")
     console.log(err);
   });
 });
@@ -97,7 +99,7 @@ sortPostsAsc.addEventListener("click", function(e) {
 const showPostDataHTML = (posts) => {
   allPostItems.innerHTML = "";
   if (!posts.length) {
-    allPostItems.innerHTML = "Sorry, there are no posts today";
+    generateErrorMessage(allPostItems, "Sorry, could not find any posts..");
   } else {
     const htmlPostsFeed = posts
       .map((post) => {

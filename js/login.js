@@ -1,6 +1,6 @@
 import { USER_LOGIN_URL } from "./settings/api";
 import { checkLength, emailValid } from "./utils/validation";
-import { setError, setSuccess } from "./utils/messages";
+import { setError, setSuccess, generateErrorMessage } from "./utils/messages";
 import { saveUserToStorage, saveToken } from "./utils/storage";
 
 const loginForm = document.getElementById("loginForm");
@@ -70,15 +70,15 @@ if (loginForm) {
           location.href = "/";
         } else {
           const err = await response.json();
-          const message = `Sorry, ${err} `;
-          console.log(`Post request failed ${err.message}`);
-          throw new Error(message);
+          generateErrorMessage(loginForm,`I'm sorry but ${err.errors[0].message}`);
+          throw Error(`I'm sorry but ${err.errors[0].message}`);
         }
       })().catch((err) => {
-        console.log("Error: ", err.message);
+        generateErrorMessage(loginForm,`catchError: ${err.message}`);
+
       });
     } else {
-      console.log("Validation failed..");
+      generateErrorMessage(loginForm,"Validation failed..");
     }
   });
 }

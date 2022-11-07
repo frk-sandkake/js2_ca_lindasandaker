@@ -1,6 +1,7 @@
 import moment from "moment";
 import { GET_USER_POSTS_URL, DELETE_POST_URL } from "./settings/api";
 import { getToken } from "./utils/storage";
+import { generateErrorMessage } from "./utils/messages";
 
 const accessToken = getToken();
 if (!accessToken) {
@@ -8,6 +9,8 @@ if (!accessToken) {
 }
 
 const myPostItems = document.getElementById("myPostItems");
+let deleteUserPostBtn = document.getElementsByClassName("delete-post-btn");
+
 
 async function getMyPosts() {
   const response = await fetch(GET_USER_POSTS_URL, {
@@ -21,15 +24,14 @@ async function getMyPosts() {
   if (response.ok) {
     const userJSON = await response.json();
     const { posts } = userJSON;
-    let now = moment(new Date());
 
     if (!posts.length) {
-      console.log("No posts found");
+     generateErrorMessage(myPostItems,"Sorry, no posts found..");
     } else {
       const htmlPostsFeed = posts
         .map((post) => {
           const { id, owner, title, body, created } = post;
-          const createdXDaysAgo = now.diff(created, "days");
+          const createdWhen = moment(created).fromNow();
 
           return `
                  <li class="m-4 col-span-1 p-4 border-fuchsia-700 border-2 border-b-4 rounded shadow focus-within:ring-2 focus-within:ring-inset focus-within:ring-teal-600">
@@ -46,7 +48,7 @@ async function getMyPosts() {
                             </h3>
                         </a>            
                         <time datetime="2021-01-27T16:35" class="col-span-1 text-xs text-neutral-300 whitespace-nowrap">
-                              ${createdXDaysAgo} days ago
+                              ${createdWhen}
                         </time>
                         <p class="my-2 p-4 bg-orange-50 rounded-md font-medium col-span-5">
                             ${body}
@@ -57,7 +59,10 @@ async function getMyPosts() {
                         <a href="/edit-post.html?post_id=${id}" class="col-span-2 text-center mt-2 mb-4 pt-1 pb-2 text-lg font-semibold text-cyan-300 hover:text-cyan-900">
                             Edit
                         </a>
-                    </div>
+                        </div>
+                      <div role="none" class="py-4 lg:col-span-2 text-center">
+                        <p data-input-general-message class="text-2xl text-orange-100"></p>
+                     </div>
                   </li>
               `;
         })
@@ -66,8 +71,7 @@ async function getMyPosts() {
     }
   } else {
     const err = await response.json();
-    const message = `Sorry, ${err}`;
-    console.log(message);
+    generateErrorMessage(myPostItems,`I'm sorry but ${err.errors[0].message}`);
   }
 }
 
@@ -76,7 +80,6 @@ getMyPosts().then(() => {
 });
 
 function deleteUserPostBtnEvent() {
-  let deleteUserPostBtn = document.getElementsByClassName("delete-post-btn");
   const allDeleteBtns = deleteUserPostBtn.length;
 
   for (let i = 0; i < allDeleteBtns; i++) {
@@ -103,12 +106,11 @@ function deletePostByIdHandler(id) {
         });
       } else {
         const err = await response.json();
-        const message = `Sorry, ${err}`;
-        console.log(message);
-        throw new Error(message);
+        generateErrorMessage(myPostItems,`I'm sorry but ${err.errors[0].message}`);
+        throw new Error(`I'm sorry but ${err.errors[0].message}`);
       }
-    } catch (e) {
-      console.log(e);
+    } catch (err) {
+      generateErrorMessage(myPostItems,`catchError: ${err.message}`);
     }
   };
   deletePostById().then(() => {});
