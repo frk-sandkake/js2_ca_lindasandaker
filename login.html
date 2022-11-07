@@ -7,7 +7,7 @@
     <script type="module" src="/js/index.js" defer></script>
     <script type="module" src="/js/login.js" defer></script>
   </head>
-  <body class="bg-gradient-to-br from-teal-500 to-fuchsia-600 w-full mx-auto">
+  <body class="bg-gradient-to-br h-screen from-teal-500 to-fuchsia-600 w-full mx-auto">
   <!-- Navigation header (js/components/nav-bar.js) -->
   <header
       class="sticky top-0 z-30 p-3 bg-gradient-to-br from-teal-500 to-fuchsia-700 shadow"
@@ -19,9 +19,7 @@
     <!-- LogIn -->
     <main class="w-full mx-auto my-8 px-4 py-4 flex flex-col gap-8 justify-start items-center sm:w-11/12 md:w-10/12 lg:w-9/12">
         <article>
-            <h1 class="my-4 text-2xl text-orange-50">
-                Welcome back fellow Noroff socialites!
-            </h1>
+            <h1 class="my-4 text-2xl text-orange-50">Welcome back fellow Noroff socialites!</h1>
         </article>
       <div
         role="none"
@@ -30,7 +28,7 @@
           <!-- LogIn form (validation and error message in login.js) -->
         <section class="my-8 py-8">
           <form
-            id="loginForm"
+            id="loginForm" aria-labelledby="loginForm"
             class="mx-auto px-4 bg-gray-800 bg-opacity-50 rounded-md sm:w-11/12 md:w-10/12 lg:w-9/12"
           >
             <fieldset class="grid grid-cols-1 gap-4 sm:grid-cols-2">
@@ -39,7 +37,7 @@
               </legend>
               <!-- EmailLogin -->
               <div
-                role="group"
+                role="group" aria-labelledby="emailLogin"
                 class="flex flex-col text-lg text-orange-50 font-mono"
               >
                 <label for="emailLogin" class="sr-only">Email:</label>
@@ -51,43 +49,43 @@
                   placeholder="Your Noroff email"
                   autofocus
                 />
-                <div
+                <span role="alert" aria-label="error message"
                   class="hidden p-2 bg-neutral-900 rounded-md text-sm text-center text-red-600"
-                  data-input-error-message></div>
+                  data-input-error-message aria-live="polite"></span>
               </div>
               <!-- Password -->
               <div
-                role="group"
+                role="group" aria-labelledby="password"
                 class="flex flex-col text-lg text-orange-50 font-mono"
               >
                 <label for="password" class="sr-only">Password</label>
                 <input
                   id="password"
-                  class="p-2 rounded-md bg-neutral-900 placeholder-orange-50 focus:z-10 focus:outline-none focus:ring-indigo-500"
+                  class="p-2 rounded-md bg-neutral-900 placeholder-orange-50 focus:z-10 focus:outline-none focus:ring-indigo-500 invalid:border-red-600"
                   type="password"
                   name="password"
                   placeholder="Your password"
                 />
-                <div
-                  class="hidden p-2 bg-neutral-900 rounded-md text-sm text-center text-red-600"
-                  data-input-error-message></div>
+                <span role="alert" aria-label="error message"
+                  class="error hidden p-2 bg-neutral-900 rounded-md text-sm text-center text-red-600"
+                  data-input-error-message aria-live="polite"></span>
               </div>
             </fieldset>
             <button
               type="submit"
-              class="w-1/2 pt-1 pb-2 my-8 rounded-md shadow text-lg font-semibold text-teal-200 bg-indigo-700 bg-opacity-80 hover:bg-opacity-100"
+              class="pt-1 pb-2 my-8 rounded-md text-lg font-semibold text-teal-200 bg-indigo-700 border-b-2 border-orange-300 bg-opacity-80 hover:bg-opacity-100"
             >
               Log In
             </button>
-            <div role="none" class="py-4 lg:col-span-2 text-center">
-              <p data-input-general-message class="text-2xl text-orange-100"></p>
+            <div role="alert" aria-label="general error message" class="py-4 lg:col-span-2 text-center">
+              <p data-input-general-message aria-live="polite" class="text-2xl text-orange-100"></p>
             </div>
           </form>
         </section>
       </div>
     </main>
     <!-- Footer -->
-    <footer class="w-full py-4 text-center bg-neutral-900">
+    <footer class="w-full fixed bottom-0 py-4 text-center bg-neutral-900">
       <small class="text-orange-50"> &#169; 2022 frk.Sandkake </small>
     </footer>
   </body>
