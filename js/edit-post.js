@@ -76,7 +76,7 @@ editPostForm.addEventListener("submit", (e) => {
 
       if (response.ok) {
         const data = await response.json();
-        location.href = `../single-post.html?post_id=${postId}`;
+        location.href = `../profile.html?post_id=${postId}`;
       } else {
         const err = await response.json();
         const message = `I'm sorry but ${err}`;

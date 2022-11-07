@@ -67,7 +67,7 @@ if (loginForm) {
             email: email,
           };
           saveUserToStorage(userToSave);
-          location.href = "/";
+          location.href = "../index.html";
         } else {
           const err = await response.json();
           generateErrorMessage(loginForm,`I'm sorry but ${err.errors[0].message}`);
