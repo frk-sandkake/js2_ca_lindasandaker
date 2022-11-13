@@ -1,32 +1,31 @@
-import { EDIT_POST_URL, GET_POST_ID_URL } from './settings/api';
-import { getToken } from './utils/storage';
-import { checkLength } from './utils/validation';
-import { generateErrorMessage, setError, setSuccess } from './utils/messages';
+import { EDIT_POST_URL, GET_POST_ID_URL } from "./settings/api";
+import { getToken } from "./utils/storage";
+import { checkLength } from "./utils/validation";
+import { setError, setSuccess } from "./utils/messages";
 
 const accessToken = getToken();
 
-const editPostForm = document.getElementById('editPostForm');
-const postTitle = document.getElementById('postTitle');
-const postContent = document.getElementById('postContent');
+const editPostForm = document.getElementById("editPostForm");
+const postTitle = document.getElementById("postTitle");
+const postContent = document.getElementById("postContent");
 
 const paramString = window.location.search;
 const searchParam = new URLSearchParams(paramString);
-const postId = searchParam.get('post_id');
+const postId = searchParam.get("post_id");
 
 async function getPostById() {
   const response = await fetch(`${GET_POST_ID_URL}/${postId}`, {
-    method: 'GET',
+    method: "GET",
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
       Authorization: `Bearer ${accessToken}`,
     },
   });
 
   if (response.status === 200) {
     const data = await response.json();
-    const {
-      id, title, body, created, updated,
-    } = data;
+    const { id, title, body, created, updated } = data;
+    console.log(id, created, updated);
     postTitle.value = title;
     postContent.value = body;
   } else {
@@ -36,10 +35,10 @@ async function getPostById() {
 }
 
 getPostById().catch((err) => {
-  generateErrorMessage(editPostForm, `${err}`);
+  console.log(err);
 });
 
-editPostForm.addEventListener('submit', (e) => {
+editPostForm.addEventListener("submit", (e) => {
   e.preventDefault();
 
   let isPostTitle = false;
@@ -47,7 +46,7 @@ editPostForm.addEventListener('submit', (e) => {
     setSuccess(postTitle);
     isPostTitle = true;
   } else {
-    setError(postTitle, 'Please add an title');
+    setError(postTitle, "Please add an title");
   }
 
   let isPostContent = false;
@@ -58,35 +57,36 @@ editPostForm.addEventListener('submit', (e) => {
     setError(postContent, "Don't forget your message");
   }
 
-  const isPostValid = isPostTitle && isPostContent;
+  let isPostValid = isPostTitle && isPostContent;
   if (isPostValid) {
     const postData = {
       title: postTitle.value,
       body: postContent.value,
     };
 
-    (async function editPost() {
+    (async function editPost_PUT() {
       const response = await fetch(`${EDIT_POST_URL}/${postId}`, {
-        method: 'PUT',
+        method: "PUT",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
           Authorization: `Bearer ${accessToken}`,
         },
         body: JSON.stringify(postData),
       });
 
-      const data = await response.json();
-
       if (response.ok) {
-        location.href = `/profile.html?post_id=${postId}`;
+        const data = await response.json();
+        location.href = `../profile.html?post_id=${postId}`;
       } else {
-        generateErrorMessage(editPostForm, `I'm sorry but ${data.errors[0].message}`);
-        throw Error(`I'm sorry but ${data.errors[0].message}`);
+        const err = await response.json();
+        const message = `I'm sorry but ${err}`;
+        throw new Error(message);
       }
-    }()).catch((err) => {
-      generateErrorMessage(editPostForm, `${err.message}`);
+      editPost_PUT.reset();
+    })().catch((err) => {
+      console.log("error: ", err);
     });
   } else {
-    generateErrorMessage(editPostForm, 'Did you forget something? :)');
+    console.log("Validation failed");
   }
 });
