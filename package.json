@@ -1,39 +1,39 @@
 {
-    "name": "js2-lindasandaker",
-    "version": "0.0.0",
-    "description": "JavaScript 2, Course Assignment; Building a social media app, fetching data from Noroff Social API.",
-    "main": "index.js",
-    "scripts": {
-        "dev": "vite",
-        "build": "vite build",
-        "preview": "vite preview",
-        "test": "echo \"Error: no test specified\" && exit 1",
-        "format": "npx prettier --write .",
-        "lint": "npx eslint ./**",
-        "lint-fix": "npx eslint --fix ./**"
-    },
-    "husky": {
-        "hooks": {
-            "pre-commit": "pretty-quick --staged"
-        }
-    },
-    "author": "Linda Sandaker",
-    "devDependencies": {
-        "@tailwindcss/forms": "^0.5.3",
-        "autoprefixer": "^10.4.12",
-        "cypress": "^10.11.0",
-        "eslint": "^8.27.0",
-        "eslint-config-airbnb-base": "^15.0.0",
-        "eslint-plugin-import": "^2.26.0",
-        "husky": "^8.0.2",
-        "postcss": "^8.4.17",
-        "prettier": "^2.7.1",
-        "pretty-quick": "^3.1.3",
-        "tailwindcss": "^3.1.8",
-        "vite": "^3.1.0"
-    },
-    "dependencies": {
-        "flowbite": "^1.5.3",
-        "moment": "^2.29.4"
+  "name": "js2-lindasandaker",
+  "version": "0.0.0",
+  "description": "JavaScript 2, Course Assignment; Building a social media app, fetching data from Noroff Social API.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "format": "npx prettier --write .",
+    "lint": "npx eslint ./**",
+    "lint-fix": "npx eslint --fix ./**"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged"
     }
+  },
+  "author": "Linda Sandaker",
+  "devDependencies": {
+    "@tailwindcss/forms": "^0.5.3",
+    "autoprefixer": "^10.4.12",
+    "cypress": "^10.11.0",
+    "eslint": "^8.27.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "husky": "^8.0.2",
+    "postcss": "^8.4.17",
+    "prettier": "^2.7.1",
+    "pretty-quick": "^3.1.3",
+    "tailwindcss": "^3.1.8",
+    "vite": "^3.1.0"
+  },
+  "dependencies": {
+    "flowbite": "^1.5.3",
+    "moment": "^2.29.4"
+  }
 }

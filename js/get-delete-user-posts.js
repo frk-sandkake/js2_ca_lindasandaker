@@ -28,13 +28,13 @@ async function getMyPosts() {
       generateErrorMessage(myPostItems, 'Sorry, no posts found..');
     } else {
       const htmlPostsFeed = posts
-        .map((post) => {
-          const {
-            id, owner, title, body, created,
-          } = post;
-          const createdWhen = moment(created).fromNow();
+          .map((post) => {
+            const {
+              id, owner, title, body, created,
+            } = post;
+            const createdWhen = moment(created).fromNow();
 
-          return `
+            return `
                  <li class="m-4 col-span-1 p-4 border-fuchsia-700 border-2 border-b-4 rounded shadow focus-within:ring-2 focus-within:ring-inset focus-within:ring-teal-600">
                     <div class="grid grid-cols-5">
                         <div role="img" class="col-span-5 ">
@@ -66,8 +66,8 @@ async function getMyPosts() {
                      </div>
                   </li>
               `;
-        })
-        .join('');
+          })
+          .join('');
       myPostItems.insertAdjacentHTML('beforeend', htmlPostsFeed);
     }
   } else {

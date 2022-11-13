@@ -15,7 +15,6 @@ dist-debug.log*
 dist-error.log
 *.local
 
-
 cypress
 cypress.config.js
 tailwind.config.js
