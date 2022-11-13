@@ -1,3 +1,5 @@
+package.json
+package-lock.json
 # Logs
 logs
 *.log
@@ -12,6 +14,15 @@ dist
 dist-debug.log*
 dist-error.log
 *.local
+
+cypress
+cypress.config.js
+tailwind.config.js
+postcss.config.js
+vite.config.js
+
+uploads
+style.css
 
 # Editor directories and files
 .vscode/*

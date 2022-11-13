@@ -1,9 +1,11 @@
-const tokenKey = "token";
-const userKey = "user";
+const tokenKey = 'token';
+const userKey = 'user';
+
+function saveDataToStorage(key, value) {
+  localStorage.setItem(key, JSON.stringify(value));
+}
 
 function saveToken(token) {
-  console.log("token: ", token);
-  console.log("tokenKey: ", tokenKey);
   saveDataToStorage(tokenKey, token);
 }
 
@@ -11,35 +13,28 @@ function getToken() {
   const value = localStorage.getItem(tokenKey);
   if (value) {
     return JSON.parse(value);
-  } else {
-    return null;
   }
+  return null;
 }
 
 function saveUserToStorage(user) {
   saveDataToStorage(userKey, user);
 }
 
-function getUserNameStorage() {
-  const user = getDataFromStorage(userKey);
-  if (userKey) {
-    return user.name;
-  } else {
-    return null;
-  }
-}
-
-function saveDataToStorage(key, value) {
-  localStorage.setItem(key, JSON.stringify(value));
-}
-
 function getDataFromStorage(key) {
   const value = localStorage.getItem(key);
   if (value) {
     return JSON.parse(value);
-  } else {
-    return [];
   }
+  return [];
+}
+
+function getUserNameStorage() {
+  const user = getDataFromStorage(userKey);
+  if (userKey) {
+    return user.name;
+  }
+  return null;
 }
 
 function clearDataFromStorage() {
@@ -47,9 +42,5 @@ function clearDataFromStorage() {
 }
 
 export {
-  saveToken,
-  getToken,
-  saveUserToStorage,
-  getUserNameStorage,
-  clearDataFromStorage,
+  saveToken, getToken, saveUserToStorage, getUserNameStorage, clearDataFromStorage,
 };
