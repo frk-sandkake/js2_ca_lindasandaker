@@ -1,37 +1,36 @@
-import moment from 'moment';
-import { GET_USER_POSTS_URL, DELETE_POST_URL } from './settings/api';
-import { getToken } from './utils/storage';
-import { generateErrorMessage } from './utils/messages';
+import moment from "moment";
+import { GET_USER_POSTS_URL, DELETE_POST_URL } from "./settings/api";
+import { getToken } from "./utils/storage";
+import { generateErrorMessage } from "./utils/messages";
 
 const accessToken = getToken();
 if (!accessToken) {
-  location.href = '/login.html';
+  location.href = "/login.html";
 }
 
-const myPostItems = document.getElementById('myPostItems');
-const deleteUserPostBtn = document.getElementsByClassName('delete-post-btn');
+const myPostItems = document.getElementById("myPostItems");
+let deleteUserPostBtn = document.getElementsByClassName("delete-post-btn");
+
 
 async function getMyPosts() {
   const response = await fetch(GET_USER_POSTS_URL, {
-    method: 'GET',
+    method: "GET",
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
       Authorization: `Bearer ${accessToken}`,
     },
   });
-  const userJSON = await response.json();
 
   if (response.ok) {
+    const userJSON = await response.json();
     const { posts } = userJSON;
 
     if (!posts.length) {
-      generateErrorMessage(myPostItems, 'Sorry, no posts found..');
+     generateErrorMessage(myPostItems,"Sorry, no posts found..");
     } else {
       const htmlPostsFeed = posts
         .map((post) => {
-          const {
-            id, owner, title, body, created,
-          } = post;
+          const { id, owner, title, body, created } = post;
           const createdWhen = moment(created).fromNow();
 
           return `
@@ -67,20 +66,25 @@ async function getMyPosts() {
                   </li>
               `;
         })
-        .join('');
-      myPostItems.insertAdjacentHTML('beforeend', htmlPostsFeed);
+        .join("");
+      myPostItems.insertAdjacentHTML("beforeend", htmlPostsFeed);
     }
   } else {
-    generateErrorMessage(myPostItems, `I'm sorry but ${userJSON.errors[0].message}`);
+    const err = await response.json();
+    generateErrorMessage(myPostItems,`I'm sorry but ${err.errors[0].message}`);
   }
 }
+
+getMyPosts().then(() => {
+  deleteUserPostBtnEvent();
+});
 
 function deleteUserPostBtnEvent() {
   const allDeleteBtns = deleteUserPostBtn.length;
 
   for (let i = 0; i < allDeleteBtns; i++) {
-    deleteUserPostBtn[i].addEventListener('click', () => {
-      const postId = deleteUserPostBtn[i].getAttribute('data-id');
+    deleteUserPostBtn[i].addEventListener("click", () => {
+      const postId = deleteUserPostBtn[i].getAttribute("data-id");
       deletePostByIdHandler(postId);
     });
   }
@@ -89,28 +93,25 @@ function deleteUserPostBtnEvent() {
 function deletePostByIdHandler(id) {
   const deletePostById = async () => {
     try {
-      const response = await fetch(`${DELETE_POST_URL}/${id}`, {
-        method: 'DELETE',
+      let response = await fetch(`${DELETE_POST_URL}/${id}`, {
+        method: "DELETE",
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
       });
       if (response.status === 200) {
-        window.reload();
+        location.reload();
         getMyPosts().then(() => {
           deleteUserPostBtnEvent();
         });
       } else {
         const err = await response.json();
-        generateErrorMessage(myPostItems, `I'm sorry but ${err.errors[0].message}`);
+        generateErrorMessage(myPostItems,`I'm sorry but ${err.errors[0].message}`);
+        throw new Error(`I'm sorry but ${err.errors[0].message}`);
       }
     } catch (err) {
-      generateErrorMessage(myPostItems, `catchError: ${err.message}`);
+      generateErrorMessage(myPostItems,`catchError: ${err.message}`);
     }
   };
   deletePostById().then(() => {});
 }
-
-getMyPosts().then(() => {
-  deleteUserPostBtnEvent();
-});
