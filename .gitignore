@@ -13,6 +13,7 @@ dist-debug.log*
 dist-error.log
 *.local
 
+cypress
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

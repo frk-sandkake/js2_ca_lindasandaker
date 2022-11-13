@@ -8,7 +8,9 @@
     "build": "vite build",
     "preview": "vite preview",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "format": "npx prettier --write ."
+    "format": "npx prettier --write .",
+    "lint": "npx eslint ./**",
+    "lint-fix": "npx eslint --fix ./**"
   },
   "husky": {
     "hooks": {
@@ -20,6 +22,9 @@
     "@tailwindcss/forms": "^0.5.3",
     "autoprefixer": "^10.4.12",
     "cypress": "^10.11.0",
+    "eslint": "^8.27.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.26.0",
     "husky": "^8.0.2",
     "postcss": "^8.4.17",
     "prettier": "^2.7.1",
