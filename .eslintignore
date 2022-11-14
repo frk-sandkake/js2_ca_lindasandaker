@@ -21,8 +21,8 @@ tailwind.config.js
 postcss.config.js
 vite.config.js
 
-uploads
-style.css
+src/uploads
+src/style.css
 
 # Editor directories and files
 .vscode/*
