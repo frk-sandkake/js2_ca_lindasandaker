@@ -5,7 +5,7 @@ import { generateErrorMessage } from './utils/messages';
 
 const accessToken = getToken();
 if (!accessToken) {
-    location.href = '/login.html';
+  location.href = '/login.html';
 }
 
 const searchBar = document.getElementById('search');
@@ -15,15 +15,17 @@ const allPostItems = document.getElementById('allPostItems');
 let posts = [];
 
 const showPostDataHTML = (posts) => {
-    allPostItems.innerHTML = '';
-    if (!posts.length) {
-        generateErrorMessage(allPostItems, 'Sorry, could not find any posts..');
-    } else {
-        const htmlPostsFeed = posts
-            .map((post) => {
-                const { id, title, body, created } = post;
-                const createdWhen = moment(created).fromNow();
-                return `
+  allPostItems.innerHTML = '';
+  if (!posts.length) {
+    generateErrorMessage(allPostItems, 'Sorry, could not find any posts..');
+  } else {
+    const htmlPostsFeed = posts
+      .map((post) => {
+        const {
+          id, title, body, created,
+        } = post;
+        const createdWhen = moment(created).fromNow();
+        return `
                   <li class="m-4 col-span-1 p-4 border-fuchsia-700 border-2 border-b-4 rounded shadow focus-within:ring-2 focus-within:ring-inset focus-within:ring-teal-600">
                     <div class="grid grid-cols-6 pb-4">
                         <div role="img" class="col-span-6 py-4">
@@ -40,80 +42,80 @@ const showPostDataHTML = (posts) => {
                     </div>
                   </li>
               `;
-            })
-            .join('');
-        allPostItems.insertAdjacentHTML('beforeend', htmlPostsFeed);
-    }
+      })
+      .join('');
+    allPostItems.insertAdjacentHTML('beforeend', htmlPostsFeed);
+  }
 };
 
 (async function getAllPosts() {
-    const response = await fetch(GET_POSTS_URL, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${accessToken}`,
-        },
-    });
-    if (response.ok) {
-        posts = await response.json();
-        showPostDataHTML(posts);
-    } else {
-        const err = await response.json();
-        const message = `Sorry, ${err}`;
-        throw new Error(message);
-    }
-})().catch((err) => {
-    generateErrorMessage(allPostItems, `${err}`);
+  const response = await fetch(GET_POSTS_URL, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+  if (response.ok) {
+    posts = await response.json();
+    showPostDataHTML(posts);
+  } else {
+    const err = await response.json();
+    const message = `Sorry, ${err}`;
+    throw new Error(message);
+  }
+}()).catch((err) => {
+  generateErrorMessage(allPostItems, `${err}`);
 });
 
 searchBar.addEventListener('keyup', (e) => {
-    const searchText = e.target.value.toLowerCase();
-    const postsFound = posts.filter(
-        (post) => post.title.toLowerCase().includes(searchText) || post.body.toLowerCase().includes(searchText)
-    );
-    showPostDataHTML(postsFound);
+  const searchText = e.target.value.toLowerCase();
+  const postsFound = posts.filter(
+    (post) => post.title.toLowerCase().includes(searchText) || post.body.toLowerCase().includes(searchText),
+  );
+  showPostDataHTML(postsFound);
 });
 
 sortPostsDesc.addEventListener('click', () => {
-    (async function sortPostsDesc() {
-        const response = await fetch(SORT_DESC_POSTS_URL, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${accessToken}`,
-            },
-        });
-        if (response.ok) {
-            const postsDesc = await response.json();
-            showPostDataHTML(postsDesc);
-        } else {
-            const err = await response.json();
-            const message = `Sorry, ${err}`;
-            throw new Error(message);
-        }
-    })().catch((err) => {
-        generateErrorMessage(allPostItems, `${err}`);
+  (async function sortPostsDesc() {
+    const response = await fetch(SORT_DESC_POSTS_URL, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${accessToken}`,
+      },
     });
+    if (response.ok) {
+      const postsDesc = await response.json();
+      showPostDataHTML(postsDesc);
+    } else {
+      const err = await response.json();
+      const message = `Sorry, ${err}`;
+      throw new Error(message);
+    }
+  }()).catch((err) => {
+    generateErrorMessage(allPostItems, `${err}`);
+  });
 });
 
 sortPostsAsc.addEventListener('click', () => {
-    (async function sortPostsAsc() {
-        const response = await fetch(SORT_ASC_POSTS_URL, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${accessToken}`,
-            },
-        });
-        if (response.ok) {
-            const postsAsc = await response.json();
-            showPostDataHTML(postsAsc);
-        } else {
-            const err = await response.json();
-            const message = `Sorry, ${err}`;
-            throw new Error(message);
-        }
-    })().catch((err) => {
-        generateErrorMessage(allPostItems, `${err}`);
+  (async function sortPostsAsc() {
+    const response = await fetch(SORT_ASC_POSTS_URL, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${accessToken}`,
+      },
     });
+    if (response.ok) {
+      const postsAsc = await response.json();
+      showPostDataHTML(postsAsc);
+    } else {
+      const err = await response.json();
+      const message = `Sorry, ${err}`;
+      throw new Error(message);
+    }
+  }()).catch((err) => {
+    generateErrorMessage(allPostItems, `${err}`);
+  });
 });

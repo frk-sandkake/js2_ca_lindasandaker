@@ -9,19 +9,21 @@ const accessToken = getToken();
 const singlePostView = document.getElementById('postDetails');
 
 async function getPostById() {
-    const response = await fetch(`${GET_POST_ID_URL}/${postId}`, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${accessToken}`,
-        },
-    });
-    const data = await response.json();
-    const { id, title, body, created, updated } = data;
-    const createdWhen = moment(created).fromNow();
-    const updatedWhen = moment(updated).fromNow();
+  const response = await fetch(`${GET_POST_ID_URL}/${postId}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+  const data = await response.json();
+  const {
+    id, title, body, created, updated,
+  } = data;
+  const createdWhen = moment(created).fromNow();
+  const updatedWhen = moment(updated).fromNow();
 
-    singlePostView.innerHTML = `
+  singlePostView.innerHTML = `
         <div class="p-4 grid grid-cols-6 border-fuchsia-700 border-2 border-b-4 rounded shadow">
              <div role="img" class="col-span-6">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="inline-block w-6 h-6">
