@@ -1,4 +1,5 @@
 import { CREATE_POST_URL } from './settings/api';
+import { createPost } from "./utils/create-post";
 import { getToken } from './utils/storage';
 import { checkLength } from './utils/validation';
 import { generateErrorMessage, setError, setSuccess } from './utils/messages';
@@ -34,25 +35,12 @@ createPostForm.addEventListener('submit', (e) => {
         };
         const accessToken = getToken();
 
-        (async function createPost() {
-            const response = await fetch(CREATE_POST_URL, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `Bearer ${accessToken}`,
-                },
-                body: JSON.stringify(postData),
-            });
-
-            const postJSON = await response.json();
-
-            if (response.ok) {
-                window.reload();
-            } else {
-                generateErrorMessage(createPostForm, `I'm sorry but ${postJSON.errors[0].message}`);
-                throw new Error(`I'm sorry but ${postJSON.errors[0].message}`);
-            }
-        })().catch((err) => {
+        createPost(accessToken, postData, CREATE_POST_URL)
+            .then((response) => {
+                createPostForm.reset();
+                location.href = '../profile.html';
+            })
+            .catch((err) => {
             generateErrorMessage(createPostForm, `${err}`);
         });
     } else {
