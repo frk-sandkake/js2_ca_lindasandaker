@@ -5,36 +5,34 @@ import { generateErrorMessage } from './utils/messages';
 
 const accessToken = getToken();
 if (!accessToken) {
-  location.href = '/login.html';
+    location.href = '/login.html';
 }
 
 const myPostItems = document.getElementById('myPostItems');
 const deleteUserPostBtn = document.getElementsByClassName('delete-post-btn');
 
 async function getMyPosts() {
-  const response = await fetch(GET_USER_POSTS_URL, {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${accessToken}`,
-    },
-  });
-  const userJSON = await response.json();
+    const response = await fetch(GET_USER_POSTS_URL, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${accessToken}`,
+        },
+    });
+    const userJSON = await response.json();
 
-  if (response.ok) {
-    const { posts } = userJSON;
+    if (response.ok) {
+        const { posts } = userJSON;
 
-    if (!posts.length) {
-      generateErrorMessage(myPostItems, 'Sorry, no posts found..');
-    } else {
-      const htmlPostsFeed = posts
-          .map((post) => {
-            const {
-              id, owner, title, body, created,
-            } = post;
-            const createdWhen = moment(created).fromNow();
+        if (!posts.length) {
+            generateErrorMessage(myPostItems, 'Sorry, no posts found..');
+        } else {
+            const htmlPostsFeed = posts
+                .map((post) => {
+                    const { id, owner, title, body, created } = post;
+                    const createdWhen = moment(created).fromNow();
 
-            return `
+                    return `
                  <li class="m-4 col-span-1 p-4 border-fuchsia-700 border-2 border-b-4 rounded shadow focus-within:ring-2 focus-within:ring-inset focus-within:ring-teal-600">
                     <div class="grid grid-cols-5">
                         <div role="img" class="col-span-5 ">
@@ -66,51 +64,51 @@ async function getMyPosts() {
                      </div>
                   </li>
               `;
-          })
-          .join('');
-      myPostItems.insertAdjacentHTML('beforeend', htmlPostsFeed);
+                })
+                .join('');
+            myPostItems.insertAdjacentHTML('beforeend', htmlPostsFeed);
+        }
+    } else {
+        generateErrorMessage(myPostItems, `I'm sorry but ${userJSON.errors[0].message}`);
     }
-  } else {
-    generateErrorMessage(myPostItems, `I'm sorry but ${userJSON.errors[0].message}`);
-  }
 }
 
 function deleteUserPostBtnEvent() {
-  const allDeleteBtns = deleteUserPostBtn.length;
+    const allDeleteBtns = deleteUserPostBtn.length;
 
-  for (let i = 0; i < allDeleteBtns; i++) {
-    deleteUserPostBtn[i].addEventListener('click', () => {
-      const postId = deleteUserPostBtn[i].getAttribute('data-id');
-      deletePostByIdHandler(postId);
-    });
-  }
+    for (let i = 0; i < allDeleteBtns; i++) {
+        deleteUserPostBtn[i].addEventListener('click', () => {
+            const postId = deleteUserPostBtn[i].getAttribute('data-id');
+            deletePostByIdHandler(postId);
+        });
+    }
 }
 
 function deletePostByIdHandler(id) {
-  const deletePostById = async () => {
-    try {
-      const response = await fetch(`${DELETE_POST_URL}/${id}`, {
-        method: 'DELETE',
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      });
-      if (response.status === 200) {
-        window.reload();
-        getMyPosts().then(() => {
-          deleteUserPostBtnEvent();
-        });
-      } else {
-        const err = await response.json();
-        generateErrorMessage(myPostItems, `I'm sorry but ${err.errors[0].message}`);
-      }
-    } catch (err) {
-      generateErrorMessage(myPostItems, `catchError: ${err.message}`);
-    }
-  };
-  deletePostById().then(() => {});
+    const deletePostById = async () => {
+        try {
+            const response = await fetch(`${DELETE_POST_URL}/${id}`, {
+                method: 'DELETE',
+                headers: {
+                    Authorization: `Bearer ${accessToken}`,
+                },
+            });
+            if (response.status === 200) {
+                window.reload();
+                getMyPosts().then(() => {
+                    deleteUserPostBtnEvent();
+                });
+            } else {
+                const err = await response.json();
+                generateErrorMessage(myPostItems, `I'm sorry but ${err.errors[0].message}`);
+            }
+        } catch (err) {
+            generateErrorMessage(myPostItems, `catchError: ${err.message}`);
+        }
+    };
+    deletePostById().then(() => {});
 }
 
 getMyPosts().then(() => {
-  deleteUserPostBtnEvent();
+    deleteUserPostBtnEvent();
 });
