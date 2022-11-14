@@ -1,60 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Home page</title>
-    <script type="module" src="/js/index.js" defer></script>
-    <script type="module" src="/js/get-posts.js" defer></script>
-</head>
-<body class="bg-gradient-to-br from-teal-500 to-fuchsia-600 w-full mx-auto">
-<!-- Navigation header (js/components/nav-bar.js) -->
-<header class="sticky top-0 z-30 p-3 bg-gradient-to-br from-teal-500 to-fuchsia-700 shadow">
-    <nav id="nav-bar"></nav>
-</header>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Home page</title>
+        <script type="module" src="/js/index.js" defer></script>
+        <script type="module" src="/js/get-posts.js" defer></script>
+    </head>
+    <body class="bg-gradient-to-br from-teal-500 to-fuchsia-600 w-full mx-auto">
+        <!-- Navigation header (js/components/nav-bar.js) -->
+        <header class="sticky top-0 z-30 p-3 bg-gradient-to-br from-teal-500 to-fuchsia-700 shadow">
+            <nav id="nav-bar"></nav>
+        </header>
 
-<!-- All posts Feed -->
-<main class="mx-auto my-6 grid lg:grid-cols-2 gap-y-4 justify-items-center max-w-5xl">
-    <h1 class="my-4 text-2xl lg:col-span-2">Latest posts</h1>
+        <!-- All posts Feed -->
+        <main class="mx-auto my-6 grid lg:grid-cols-2 gap-y-4 justify-items-center max-w-5xl">
+            <h1 class="my-4 text-2xl lg:col-span-2">Latest posts</h1>
 
-    <section class="mt-8 lg:col-span-2">
-        <form class="grid grid-cols-1">
-            <label for="search" class="sr-only">Search</label>
-            <input
-                    id="search"
-                    name="search"
-                    placeholder="Search"
-                    type="search"
-                    class="col-span-1 w-full text-lg bg-orange-50 border-orange-600 border-2 rounded-md shadow-lg focus:outline-none focus:ring-indigo-500"
-            />
-        </form>
-    </section>
+            <section class="mt-8 lg:col-span-2">
+                <form class="grid grid-cols-1">
+                    <label for="search" class="sr-only">Search</label>
+                    <input
+                        id="search"
+                        name="search"
+                        placeholder="Search"
+                        type="search"
+                        class="col-span-1 w-full text-lg bg-orange-50 border-orange-600 border-2 rounded-md shadow-lg focus:outline-none focus:ring-indigo-500"
+                    />
+                </form>
+            </section>
 
-    <!-- All posts section (get-posts.js) -->
-    <section class="lg:col-span-2">
-        <div role="group" class="grid grid-cols-2">
-            <button
-                    id="sortDesc"
-                    class="col-span-1 mx-4 mt-2 mb-4 pt-1 pb-2 rounded-md shadow-lg text-lg font-semibold text-cyan-300 bg-teal-900 hover:bg-cyan-800 target:bg-cyan-800"
-            >
-                Latest
-            </button>
-            <button
-                    id="sortAsc"
-                    class="col-span-1 mx-4 mt-2 mb-4 pt-1 pb-2 rounded-md shadow-lg text-lg font-semibold text-cyan-300 bg-teal-900 hover:bg-cyan-800 target:bg-cyan-800"
-            >
-                Oldest
-            </button>
-        </div>
-        <ul id="allPostItems" role="list" class="max-w-[640px] grid grid-cols-1 gap-y-4 md:min-w-[640px]"></ul>
-        <div role="alert" aria-label="all posts general error message" class="py-4 lg:col-span-2 text-center">
-            <p data-input-general-message class="text-2xl text-orange-100" aria-live="polite"></p>
-        </div>
-    </section>
-</main>
-<!-- Footer -->
-<footer class="w-full py-8 text-center bg-neutral-900">
-    <small class="text-orange-50"> &#169; 2022 frk.Sandkake </small>
-</footer>
-</body>
+            <!-- All posts section (get-posts.js) -->
+            <section class="lg:col-span-2">
+                <div role="group" class="grid grid-cols-2">
+                    <button
+                        id="sortDesc"
+                        class="col-span-1 mx-4 mt-2 mb-4 pt-1 pb-2 rounded-md shadow-lg text-lg font-semibold text-cyan-300 bg-teal-900 hover:bg-cyan-800 target:bg-cyan-800"
+                    >
+                        Latest
+                    </button>
+                    <button
+                        id="sortAsc"
+                        class="col-span-1 mx-4 mt-2 mb-4 pt-1 pb-2 rounded-md shadow-lg text-lg font-semibold text-cyan-300 bg-teal-900 hover:bg-cyan-800 target:bg-cyan-800"
+                    >
+                        Oldest
+                    </button>
+                </div>
+                <ul id="allPostItems" role="list" class="max-w-[640px] grid grid-cols-1 gap-y-4 md:min-w-[640px]"></ul>
+                <div role="alert" aria-label="all posts general error message" class="py-4 lg:col-span-2 text-center">
+                    <p data-input-general-message class="text-2xl text-orange-100" aria-live="polite"></p>
+                </div>
+            </section>
+        </main>
+        <!-- Footer -->
+        <footer class="w-full py-8 text-center bg-neutral-900">
+            <small class="text-orange-50"> &#169; 2022 frk.Sandkake </small>
+        </footer>
+    </body>
 </html>

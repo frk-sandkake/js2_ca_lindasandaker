@@ -7,8 +7,8 @@ createNavBar();
 const logOutBtn = document.getElementById('logout-btn');
 
 if (logOutBtn) {
-  logOutBtn.addEventListener('click', () => {
-    clearDataFromStorage();
-    window.location.replace('/login.html');
-  });
+    logOutBtn.addEventListener('click', () => {
+        clearDataFromStorage();
+        window.location.replace('/login.html');
+    });
 }
