@@ -11,7 +11,7 @@ https://nf-api.onrender.com/docs/static/index.html#/
 
 To improve the quality of an existing `project` by establishing useful workflows that make the development process more efficient.
 
-## How to run the current project ❔❔
+## How to run the current project:
 
 -   Clone the project
 
@@ -23,14 +23,14 @@ To improve the quality of an existing `project` by establishing useful workflows
 
 -   `npm run dev` to run in Development mode and this should be on a different terminal.
 
-## `Prettier` and `HUSKY`
+## `Prettier` and `HUSKY` 
   
 Integrate the `Prettier` package and add a script call `format` for it in the package.json file `npx prettier --write .`
 Integrate the `HUSKY` package and make sure that it works and run the pre-hooks before any commit
 Make sure that you have `pretty-quick` installed
 Use a working version for `husky`
 
-## `ESLINT` with `airbnb` eslint styleguide
+## `ESLINT` with `airbnb` eslint styleguide:
 
 -   Integrate the `ESLint` package and add a script called `lint` for it in the package.json file
 
@@ -67,26 +67,25 @@ Installing eslint-config-airbnb-base@latest, eslint@^7.32.0 || ^8.2.0, eslint-pl
 "lint-fix": "npx eslint --fix ./**"
 }
 
-## Requirements for `JEST : unit tests` 🤔
+## `JEST` : unit tests 
 
-`npm install -g jest` <br>
-`npm install --save-dev @babel/plugin-transform-modules-commonjs`
 -   Integrate the `JEST` package and add a script called `test` for it in the package.json file
 -   The `logInUser` function returns a valid token when provided with valid credentials
 -   The `logoutUser` function clears the token from browser storage
 -   The `createPost` function creates a new item on the API (You need to check if the item is created from the API response)
 
-## Requirements for `end-to-end tests` 🤔
+### In terminal:
+
+`npm install -g jest` <br>
+`npm install --save-dev @babel/plugin-transform-modules-commonjs` <br>
+
+## `Cypress` : end-to-end tests 
 
 -   The `login` form validates user inputs correctly based on API restrictions
 -   The `create` item form validates user inputs correctly based on API restrictions
 -   The `logout` button logs the user out when clicked
 
-## Submission 🎉🎉🎉
-
-Please create a branch call it `workflow` to work during the CA on and deliver an `open Pull Request` from branch `workflow` into `master`.
-
-### References which may help you 🫴
+## References which may help you 🫴
 
 -   https://blog.bitsrc.io/add-prettier-to-your-project-d7e91ac03d05
 -   https://eslint.org/ and https://eslint.org/docs/latest/user-guide/getting-started

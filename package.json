@@ -13,11 +13,6 @@
         "lint": "npx eslint ./**",
         "lint-fix": "npx eslint --fix ./**"
     },
-    "husky": {
-        "hooks": {
-            "pre-commit": "pretty-quick --staged"
-        }
-    },
     "author": "Linda Sandaker",
     "devDependencies": {
         "@babel/plugin-transform-modules-commonjs": "^7.19.6",
@@ -28,6 +23,7 @@
         "eslint-config-airbnb-base": "^15.0.0",
         "eslint-plugin-import": "^2.26.0",
         "husky": "^8.0.2",
+        "jest-localstorage-mock": "^2.4.22",
         "postcss": "^8.4.17",
         "prettier": "^2.7.1",
         "pretty-quick": "^3.1.3",
@@ -38,5 +34,14 @@
         "@jest/globals": "^29.3.1",
         "flowbite": "^1.5.3",
         "moment": "^2.29.4"
+    },
+    "jest": {
+        "resetMocks": false,
+        "setupFiles": ["jest-localstorage-mock"]
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "pretty-quick --staged"
+        }
     }
 }

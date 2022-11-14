@@ -23,6 +23,7 @@ vite.config.js
 coverage
 .babelrc
 
+src/jest-test
 src/uploads
 src/style.css
 
