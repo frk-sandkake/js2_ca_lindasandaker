@@ -15,6 +15,9 @@ dist-debug.log*
 dist-error.log
 *.local
 
+coverage
+.babelrc
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
