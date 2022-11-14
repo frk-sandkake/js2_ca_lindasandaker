@@ -2,12 +2,13 @@
     "name": "js2-lindasandaker",
     "version": "0.0.0",
     "description": "JavaScript 2, Course Assignment; Building a social media app, fetching data from Noroff Social API.",
-    "main": "index.js",
+    "main": "src/js/index.js",
     "scripts": {
         "dev": "vite",
         "build": "vite build",
         "preview": "vite preview",
-        "test": "echo \"Error: no test specified\" && exit 1",
+        "test-coverage": "jest --coverage",
+        "test": "jest",
         "format": "npx prettier --write .",
         "lint": "npx eslint ./**",
         "lint-fix": "npx eslint --fix ./**"
@@ -19,6 +20,7 @@
     },
     "author": "Linda Sandaker",
     "devDependencies": {
+        "@babel/plugin-transform-modules-commonjs": "^7.19.6",
         "@tailwindcss/forms": "^0.5.3",
         "autoprefixer": "^10.4.12",
         "cypress": "^10.11.0",

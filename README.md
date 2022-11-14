@@ -1,21 +1,17 @@
-# js2_ca_lindasandaker
+# Course assignments in JavaScript2 and Workflow 
+Author: Linda Sandaker - School: Noroff VOC Oslo - Year: 2022
 
-# Workflow - Course Assignment
+## Goal JavaScript2
 
-## Goal
-
-To improve the quality of an existing `project` by establishing useful workflows that make the development process more efficient.
-
-## Brief
-
-In order to complete this task, you are given an existing JavaScript project that has:
+Make a social platform with Noroff social API. 
 
 -   API calls to `CRUD` an item
 -   API call to `authenticate` a user
 
-## How to start 🙋
+## Goal Workflow
 
--   Fork this repo on your GitHub account and start working.
+To improve the quality of an existing `project` by establishing useful workflows that make the development process more efficient.
+
 
 ## How to run the current project ❔❔
 
@@ -70,10 +66,6 @@ In order to complete this task, you are given an existing JavaScript project tha
 ## Submission 🎉🎉🎉
 
 Please create a branch call it `workflow` to work during the CA on and deliver an `open Pull Request` from branch `workflow` into `master`.
-
-Please post your PR to the peer review forum and review 2 other submissions.
-
-### You must complete the course evaluation to unlock delivery.
 
 ### References which may help you 🫴
 
