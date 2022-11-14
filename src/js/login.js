@@ -2,6 +2,7 @@ import { USER_LOGIN_URL } from './settings/api';
 import { checkLength, emailValid } from './utils/validation';
 import { setError, setSuccess, generateErrorMessage } from './utils/messages';
 import { saveUserToStorage, saveToken } from './utils/storage';
+import { userLogIn} from "./utils/login-user";
 
 const loginForm = document.getElementById('loginForm');
 const email = document.getElementById('emailLogin');
@@ -43,35 +44,13 @@ if (loginForm) {
                 password: password.value,
             };
             const USER_LOGIN_URL_ENDPOINT = `${USER_LOGIN_URL}`;
-
-            (async function userLogIn() {
-                const response = await fetch(USER_LOGIN_URL_ENDPOINT, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(userData),
-                });
-
-                if (response.ok) {
-                    const data = await response.json();
-                    const { accessToken, name, email } = data;
-
-                    saveToken(accessToken);
-
-                    const userToSave = {
-                        name,
-                        email,
-                    };
-                    saveUserToStorage(userToSave);
-                    location.href = '../index.html';
-                } else {
-                    const err = await response.json();
-                    generateErrorMessage(loginForm, `I'm sorry but ${err.errors[0].message}`);
-                    throw Error(`I'm sorry but ${err.errors[0].message}`);
-                }
-            })().catch((err) => {
-                generateErrorMessage(loginForm, `catchError: ${err.message}`);
+            userLogIn(userData, USER_LOGIN_URL_ENDPOINT)
+             .then((logInUserData) => {
+                 saveToken(logInUserData.accessToken);
+                 saveUserToStorage(logInUserData.userToSave);
+                 location.href = '../index.html';
+            }).catch((errMessage) => {
+                generateErrorMessage(loginForm, `catchError: ${errMessage}`);
             });
         } else {
             generateErrorMessage(loginForm, 'Did you forget something? :)');
