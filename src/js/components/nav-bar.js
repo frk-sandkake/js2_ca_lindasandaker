@@ -11,7 +11,7 @@ function createNavBar() {
           <li role="menuitem">
               <a role="link" href="/signup.html" class="${
                   pathname === '/signup.html'
-                      ? 'p-2 rounded font-semibold text-lg shadow-lg text-orange-400'
+                      ? 'p-2 rounded font-semibold text-lg text-orange-300'
                       : 'font-semibold text-orange-50 hover:text-orange-400'
               }">
                     LOGO
@@ -20,7 +20,7 @@ function createNavBar() {
           <li role="menuitem">
               <a role="link" href="/signup.html" class="${
                   pathname === '/signup.html'
-                      ? 'p-2 rounded font-semibold text-lg shadow-lg text-orange-400'
+                      ? 'p-2 rounded font-semibold text-lg text-orange-300'
                       : 'font-semibold text-orange-50 hover:text-orange-400'
               }">
                     SignUp
@@ -29,7 +29,7 @@ function createNavBar() {
           <li role="menuitem">
               <a role="link" href="/login.html" class="${
                   pathname === '/login.html'
-                      ? 'p-2 rounded font-semibold text-lg shadow-lg text-orange-400'
+                      ? 'p-2 rounded font-semibold text-lg text-orange-300'
                       : 'font-semibold text-orange-50 hover:text-orange-400'
               }">
                     LogIn
@@ -41,7 +41,7 @@ function createNavBar() {
           <li role="menuitem">
               <a role="link" href="/index.html" class="${
                   pathname === '/index.html'
-                      ? 'p-2 rounded font-semibold text-lg shadow-lg text-orange-400'
+                      ? 'p-2 rounded font-semibold text-lg text-orange-300'
                       : 'font-semibold text-orange-50 hover:text-orange-400'
               }">
                     Home
@@ -50,7 +50,7 @@ function createNavBar() {
           <li role="menuitem">
               <a role="link" href="/profile.html" class="${
                   pathname === '/profile.html'
-                      ? 'p-2 rounded font-semibold text-lg shadow-lg text-orange-400'
+                      ? 'p-2 rounded font-semibold text-lg text-orange-300'
                       : 'font-semibold text-orange-50 hover:text-orange-400'
               }">
                    ${userName}

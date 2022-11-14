@@ -52,10 +52,10 @@ async function getMyPosts() {
                         <p class="my-2 p-4 bg-orange-50 rounded-md font-medium col-span-5">
                             ${body}
                         </p>
-                        <button data-id="${id}" class="delete-post-btn col-span-3 mt-2 mb-4 pt-1 pb-2 rounded-md shadow-lg text-lg font-semibold text-cyan-300 bg-teal-900 hover:bg-cyan-800">
+                        <button data-id="${id}" class="delete-post-btn col-span-2 mt-2 mx-2 mb-4 pt-1 pb-2 rounded-md text-lg font-semibold text-red-500 border-b-2 border-red-500 bg-gray-800 bg-opacity-100 hover:bg-opacity-80">
                             Delete
                         </button>
-                        <a href="/edit-post.html?post_id=${id}" class="col-span-2 text-center mt-2 mb-4 pt-1 pb-2 text-lg font-semibold text-cyan-300 hover:text-cyan-900">
+                        <a href="/edit-post.html?post_id=${id}" class="col-span-1 text-center mt-2 mx-2 mb-4 pt-1 pb-2 text-lg font-semibold text-pink-300 border-b-2 border-pink-300 hover:text-pink-900">
                             Edit
                         </a>
                         </div>
